@@ -1,0 +1,121 @@
+/* ===== Shake Animation ===== */
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0) scale(1);
+  }
+  10%,
+  90% {
+    transform: translateX(-2px) scale(1.02);
+  }
+  20%,
+  80% {
+    transform: translateX(2px) scale(1.02);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-2px) scale(1.02);
+  }
+  40%,
+  60% {
+    transform: translateX(2px) scale(1.02);
+  }
+}
+
+/* ===== Draggable Answer Tags ===== */
+.draggable-answer-tag:active {
+  cursor: grabbing !important;
+}
+
+/* ===== Gap Tooltips ===== */
+.drag-drop-gap {
+  position: relative;
+}
+
+.drag-drop-gap[title]:hover::before {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.2s ease;
+}
+
+.drag-drop-gap[title]:hover::after {
+  content: "";
+  position: absolute;
+  bottom: calc(100% + 2px);
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* ===== Drag Drop Content Spacing ===== */
+.drag-drop-content {
+  line-height: 2.2 !important;
+}
+
+.drag-drop-content p {
+  margin-bottom: 16px;
+}
+
+/* ===== Gap Content ===== */
+.gap-content {
+  display: inline-block;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+  .drag-drop-gap {
+    min-width: 80px !important;
+    padding: 4px 8px !important;
+    font-size: 13px !important;
+  }
+
+  .draggable-answer-tag {
+    padding: 4px 10px !important;
+    font-size: 13px !important;
+  }
+
+  .drag-drop-gap[title]:hover::before {
+    font-size: 11px;
+    padding: 4px 8px;
+  }
+}
+
+/* ===== Print Styles ===== */
+@media print {
+  .drag-drop-gap[title]:hover::before,
+  .drag-drop-gap[title]:hover::after {
+    display: none !important;
+  }
+}

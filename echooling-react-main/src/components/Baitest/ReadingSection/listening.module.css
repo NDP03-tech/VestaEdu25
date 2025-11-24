@@ -1,0 +1,59 @@
+
+.flow-chart {
+    border: 1px solid #ccc !important;
+    padding: 20px !important;
+    margin-bottom: 20px !important;
+    position: relative !important;
+}
+.question {
+    margin: 10px 0 !important;
+}
+input {
+    width: 100px !important;
+    padding: 5px !important;
+    margin: 10px 5px !important;
+    border-radius: 10px !important;
+}
+.arrow{
+    font-size: 24px !important;
+    text-align: center!important;
+    
+    margin-left: 100px!important;
+}
+p{
+    font-size: large!important;
+    margin-left: 10px!important;
+}
+td{
+    padding: 7px!important;
+    align-items: center!important;
+}
+body {
+    font-family: Arial, sans-serif!important;
+    margin: 20px!important;
+}
+
+button{
+background-color: transparent!important;
+height: 30px!important;
+width: auto!important;
+border-radius: 10px!important;
+color: #554d09!important;
+background-color: blue transparent 50%!important;
+}
+
+
+table {
+    width: 100%!important;
+    border-collapse: collapse!important; /* Xóa khoảng cách giữa các ô */
+    margin-top: 20px!important;
+}
+th, td {
+    border: 1px solid #000!important; /* Đặt màu viền cho ô */
+    padding: 12px!important;
+    text-align: left!important;
+}
+th {
+    background-color: #f2f2f2!important; /* Màu nền cho tiêu đề */
+    font-weight: bold!important;
+}

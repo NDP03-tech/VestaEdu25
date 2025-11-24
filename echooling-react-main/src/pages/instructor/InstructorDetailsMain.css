@@ -1,0 +1,19 @@
+.page-container {
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.page-container.scrolling {
+    transform: translateY(-5px); /* Dịch chuyển nhẹ lên trên */
+    opacity: 0.9; /* Giảm độ sáng */
+}
+
+.bio-animation {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.bio-animation.visible {
+    opacity: 1;
+    transform: translateY(0);
+}

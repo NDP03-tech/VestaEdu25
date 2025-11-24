@@ -1,0 +1,28 @@
+.instructor__content-one {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.view-all-btn {
+    background-color: #dc2626;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin-left: 20px; /* Đẩy nút sang phải */
+}
+
+.view-all-btn:hover {
+    background-color: #b91c1c;
+    transform: scale(1.05);
+}
+

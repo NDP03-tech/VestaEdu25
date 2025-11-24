@@ -1,0 +1,41 @@
+.hint-wrapper {
+    display: inline-block;
+    position: relative;
+    overflow: visible;
+  }
+  
+  .hint-icon {
+    position: relative;
+    font-size: 0.8em;
+    margin-left: 4px;
+    cursor: pointer;
+    box-sizing: border-box;
+  }
+  
+  .hint-icon::after {
+    content: attr(data-hint);
+    position: absolute;
+    top: -36px;
+    left: 100%;
+    transform: translateX(10px);
+    background-color: #333;
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 9999;
+    font-size: 13px;
+    font-family: sans-serif;
+    line-height: 1.5;
+  }
+  
+  .hint-icon::after {
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  

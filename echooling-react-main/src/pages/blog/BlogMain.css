@@ -1,0 +1,9 @@
+.single-blog {
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng chuyển động khi hover */
+    border-radius: 5px; /* Bo góc cho blog */
+}
+
+.single-blog:hover {
+    transform: translateY(-5px); /* Đẩy lên một chút khi hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Đổ bóng khi hover */
+}

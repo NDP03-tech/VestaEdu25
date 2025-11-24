@@ -1,0 +1,39 @@
+
+
+/* ... existing styles ... */
+
+.priceDis {
+    font-size: 1.2rem !important;
+    font-weight: bold !important;
+    text-decoration: line-through !important;
+    color: red !important;
+}
+
+li.price {
+    color: #002366 !important;
+    font-size: 1.1rem !important;
+    font-weight: bold !important;
+}
+
+.case-img {
+    height: 150px !important;
+    overflow: hidden !important;
+}
+
+.case-img img {
+    width: 100% !important;
+    height: 150px !important;
+    object-fit: cover !important;
+}
+
+.inner-course {
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.inner-course:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    transform: translateY(-2px);
+}

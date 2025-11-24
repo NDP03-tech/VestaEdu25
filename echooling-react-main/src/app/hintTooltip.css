@@ -1,0 +1,33 @@
+.hint-wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+.hint-icon {
+  position: relative;
+  font-size: 0.8em;
+  margin-left: 4px;
+  cursor: pointer;
+}
+
+.hint-icon::after {
+  content: attr(data-hint);
+  position: absolute;
+  top: -36px; /* Điều chỉnh khoảng cách từ trên xuống */
+  left: 100%; /* Đặt bên phải của biểu tượng */
+  transform: translateX(10px) translateY(0); /* Dịch sang phải 10px để tạo khoảng cách */
+  background-color: #333;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
+  font-size: 13px;
+}
+
+.hint-icon:hover::after {
+  opacity: 1;
+}

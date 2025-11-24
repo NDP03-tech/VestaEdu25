@@ -1,0 +1,142 @@
+
+    [
+        {
+            "id": 1,
+            "image": "1.jpg",
+            "bannerImg": "event-banner.jpg",
+            
+            "date": "  Thứ 7, ngày 15/3/2025",
+            "startTime": "Thời gian: 4:00 chiều Thứ 7, ngày 15/3/2025",
+           
+            "category": "Education",
+            "title": "Writing Task 1: Line Graph",
+            "location": "Địa điểm: Vesta Academy, Số 9 Khu thương mại, tầng 1, Khu B (Khu 361), Ngõ 60, Hoàng Quốc Việt, Nghĩa Đô, Cầu Giấy, Hà Nội",
+            "cost": "100K/buổi",
+            "host": "Ms Ly",
+          
+            "content":"Chinh phục Writing Task 1 với chuyên đề Line Graph tại Vesta Academy! Bạn sẽ được học 60 phút lý thuyết chuyên sâu để nắm vững cách phân tích biểu đồ đường, sau đó thực hành 30 phút cùng giáo viên giàu kinh nghiệm để áp dụng ngay kiến thức. Đặc biệt, sau buổi học, bạn còn được tham gia miễn phí buổi luyện đề lúc 5:30 chiều để củng cố kỹ năng. Chỉ với 100k/buổi, mọi thắc mắc về IELTS sẽ được giải đáp!",
+            "phone": "Liên hệ: 0838779988 \n Email: info@vestaedu.online"
+        },
+        {
+            "id": 2,
+            "image": "2.jpg",
+            "bannerImg": "event-banner2.jpg",
+            "dayCount": "14",
+            "date": "Thứ 7, ngày 15/3/2025",
+            "startTime": "Thời gian: 4:00 chiều",
+          
+            "category": "Education",
+            "title": "Writing Task 1: Bar Chart",
+            "location": "Địa điểm: Vesta Academy, Số 9 Khu thương mại, tầng 1, Khu B (Khu 361), Ngõ 60, Hoàng Quốc Việt, Nghĩa Đô, Cầu Giấy, Hà Nội",
+            "cost": "100K/buổi",
+            "host": "Ms Ly",
+        
+            "content":"Bạn gặp khó khăn khi phân tích Bar Chart trong Writing Task 1? \n Đừng lo, Vesta Academy mang đến buổi học chuyên đề siêu chất: 60 phút giảng dạy chi tiết từ cách đọc biểu đồ đến cách viết bài chuẩn band 7+, tiếp theo là 30 phút thảo luận và luyện tập trực tiếp với giáo viên. Điểm cộng: bạn được tham gia miễn phí buổi luyện đề lúc 5:30 chiều để nâng cao kỹ năng. Phí tham gia chỉ 100k/buổi, hỏi đáp mọi vấn đề IELTS!",
+            "phone": "Liên hệ: 0838779988 \n Email: info@vestaedu.online"
+        },
+        {
+            "id": 3,
+            "image": "3.jpg",
+            "bannerImg": "event-banner3.jpg",
+
+            "date": "Thứ 7, ngày 29/3/2025",
+            "startTime": "4:00 chiều",
+   
+            "category": "Education",
+            "title": "Writing Task 1: Table.",
+            "location": "Địa điểm: Vesta Academy, Số 9 Khu thương mại, tầng 1, Khu B (Khu 361), Ngõ 60, Hoàng Quốc Việt, Nghĩa Đô, Cầu Giấy, Hà Nội",
+            "cost": "100K/buổi",
+            "host": "Ms Ly",
+  
+            "content":"Writing Task 1: Table trong Writing Task 1 làm bạn rối mắt? Tham gia chuyên đề tại Vesta Academy để nắm rõ cách viết bài chuẩn chỉnh! Buổi học kéo dài 90 phút: 60 phút học lý thuyết từ A-Z với giáo viên giỏi, 30 phút thực hành và thảo luận để biến kiến thức thành điểm số. Sau đó, bạn còn được học miễn phí buổi luyện đề lúc 5:30 chiều. Chỉ 100k/buổi, mọi câu hỏi IELTS đều được giải đáp tận tình!",
+            "phone": "Liên hệ: 0838779988 \n Email: info@vestaedu.online"
+        },
+        {
+            "id": 4,
+            "image": "4.jpg",
+            "bannerImg": "event-banner1.jpg",
+           
+            "date": "Thứ 7, ngày 5/4/2025",
+            "startTime": "4:00 chiều",
+         
+            "category": "Education",
+            "title": "Writing Task 1: Pie Chart",
+            "location": "Địa điểm: Vesta Academy, Số 9 Khu thương mại, tầng 1, Khu B (Khu 361), Ngõ 60, Hoàng Quốc Việt, Nghĩa Đô, Cầu Giấy, Hà Nội",
+            "cost": "100K/buổi",
+            "host": "Ms Ly",
+        
+            "content":"Pie Chart trong Writing Task 1 không còn là nỗi sợ khi bạn tham gia chuyên đề tại Vesta Academy! Trong 60 phút đầu, bạn sẽ học cách phân tích biểu đồ tròn một cách logic và chuẩn xác, sau đó thực hành 30 phút với sự hướng dẫn tận tình từ giáo viên. Đặc biệt, buổi luyện đề miễn phí lúc 5:30 chiều sẽ giúp bạn tự tin hơn. Phí chỉ 100k/buổi, hỏi đáp thoải mái mọi vấn đề IELTS!",
+            "phone": "Liên hệ: 0838779988 \n Email: info@vestaedu.online"
+        },
+        {
+            "id": 5,
+            "image": "5.jpg",
+            "bannerImg": "event-banner2.jpg",
+          
+            "date": "Thứ 7, ngày 12/4/2025",
+            "startTime": "4:00 chiều",
+     
+            "category": "Education",
+            "title": "Writing Task 1: Process",
+            "location": "Địa điểm: Vesta Academy, Số 9 Khu thương mại, tầng 1, Khu B (Khu 361), Ngõ 60, Hoàng Quốc Việt, Nghĩa Đô, Cầu Giấy, Hà Nội",
+            "cost": "100K/buổi",
+            "host": "Ms Ly",
+            "content":"Process trong Writing Task 1 khiến bạn lúng túng? Đến với Vesta Academy, bạn sẽ được học 60 phút lý thuyết để hiểu rõ cách mô tả quy trình, sau đó thực hành 30 phút với bài tập thực tế cùng giáo viên. Bonus: buổi luyện đề miễn phí lúc 5:30 chiều để bạn tự tin chinh phục mọi dạng đề. Chỉ với 100k/buổi, mọi thắc mắc IELTS đều được giải đáp!",
+            "phone": "Liên hệ: 0838779988 \n Email: info@vestaedu.online"
+        },
+        {
+            "id": 6,
+            "image": "6.jpg",
+            "bannerImg": "event-banner2.jpg",
+     
+            "date": "Thứ 7, ngày 19/4/2025",
+            "startTime": "4:00 chiều",
+
+            "content":"Map trong Writing Task 1 làm bạn hoang mang? Đừng lo, chuyên đề tại Vesta Academy sẽ giúp bạn! 60 phút lý thuyết chi tiết giúp bạn nắm cách miêu tả bản đồ, 30 phút thảo luận và luyện tập để áp dụng ngay. Sau buổi học, bạn còn được tham gia miễn phí buổi luyện đề lúc 5:30 chiều. Phí chỉ 100k, hỏi đáp mọi vấn đề IELTS!",
+            "category": "Education",
+            "title": "Writing Task 1: Map",
+            "location": "Địa điểm: Vesta Academy, Số 9 Khu thương mại, tầng 1, Khu B (Khu 361), Ngõ 60, Hoàng Quốc Việt, Nghĩa Đô, Cầu Giấy, Hà Nội",
+            "cost": "100K/buổi",
+            "host": "Ms Ly",
+            
+            "phone": "Liên hệ: 0838779988 \n Email: info@vestaedu.online"
+        },
+        {
+            "id": 7,
+            "image": "3.jpg",
+            "bannerImg": "event-banner3.jpg",
+
+            "date": "Thứ 7, ngày 19/4/2025",
+            "startTime": "4:00 chiều",
+        
+            "category": "Education",
+            "title": "IELTS Speaking Band 9: Part 1.",
+            "location": "Địa điểm: Vesta Academy, Số 9 Khu thương mại, tầng 1, Khu B (Khu 361), Ngõ 60, Hoàng Quốc Việt, Nghĩa Đô, Cầu Giấy, Hà Nội",
+            "cost": "100K/buổi",
+            "host": "Ms Ly",
+          
+            "content":"Phá vỡ trăn trở với câu trả lời hoàn hảo ở IELTS Speaking Part 1! Tham gia chuyên đề tại Vesta Academy: 60 phút học kỹ năng trả lời trôi chảy, tự nhiên, cộng thêm 30 phút thảo luận và thực hành với giáo viên. Đặc biệt, bạn được học miễn phí buổi luyện đề lúc 5:30 chiều. Chỉ 100k/buổi, mọi câu hỏi về IELTS đều được giải đáp!",
+
+            "phone": "Liên hệ: 0838779988 \n Email: info@vestaedu.online"
+        },
+    
+        {
+            "id": 8,
+            "image": "3.jpg",
+            "bannerImg": "event-banner3.jpg",
+
+            "date": "Thứ 7, ngày 26/4/2025",
+            "startTime": "4:00 chiều",
+        
+            "category": "Education",
+            "title": "IELTS Speaking Band 9: Part 2.",
+            "location": "Địa điểm: Vesta Academy, Số 9 Khu thương mại, tầng 1, Khu B (Khu 361), Ngõ 60, Hoàng Quốc Việt, Nghĩa Đô, Cầu Giấy, Hà Nội",
+            "cost": "100K/buổi",
+            "host": "Ms Ly",
+          
+            "content":"Trả lời trôi chảy mà điểm Speaking Part 2 vẫn kém? Đến với Vesta Academy để tìm hiểu lý do và cách khắc phục! 60 phút lý thuyết chuyên sâu giúp bạn xây dựng câu trả lời ấn tượng, 30 phút thực hành cùng giáo viên để cải thiện ngay lập tức. Tặng kèm buổi luyện đề miễn phí lúc 5:30 chiều. Phí: 100k/buổi, hỏi đáp thoải mái!",
+
+            "phone": "Liên hệ: 0838779988 \n Email: info@vestaedu.online"
+        }
+    ]
+        

@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "root",
+    "password": "phuc2112003",
+    "database": "edu_database",
+    "host": "localhost",
+    "port": 3306,
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "phuc2112003",
+    "database": "edu_database_test",
+    "host": "localhost",
+    "port": 3306,
+    "dialect": "mysql"
+  },
+  "production": {
+    "username": "root",
+    "password": "phuc2112003",
+    "database": "edu_database_prod",
+    "host": "localhost",
+    "port": 3306,
+    "dialect": "mysql"
+  }
+}

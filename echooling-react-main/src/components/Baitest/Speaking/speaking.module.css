@@ -1,0 +1,18 @@
+.backgroundYellow {
+    background-color: #ffdb39 !important;
+    text-align: left!important;
+  }
+  
+  .textBlack {
+    color: #000000 !important;
+    font-size: 36px!important;
+    font-family: "Gill Sans"!important;
+  }
+  
+  .hrStyle {
+    height: 2px!important;
+    border-width: 0!important;
+    color: gray!important;
+    background-color: gray !important;
+  }
+  

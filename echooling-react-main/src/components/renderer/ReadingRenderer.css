@@ -1,0 +1,344 @@
+/* Container */
+.reading-container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.reading-container.fullscreen-mode {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9999;
+  max-width: 100% !important;
+  border-radius: 0;
+  padding: 24px !important;
+  background: #fff;
+}
+
+/* Control Panel */
+.reading-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px 8px 0 0;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.controls-left,
+.controls-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.controls-left {
+  flex: 1;
+  min-width: 200px;
+}
+
+.controls-right button {
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.controls-right button:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Table */
+.reading-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.reading-table-header {
+  background: linear-gradient(135deg, #00306e 0%, #004494 100%);
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 16px 20px;
+  text-align: center;
+  border: none;
+}
+
+.reading-cell {
+  padding: 0;
+  border: 1px solid #e8e8e8;
+  vertical-align: top;
+}
+
+/* Scrollable Areas */
+.scrollable-left,
+.scrollable-right {
+  max-height: 600px;
+  overflow-y: auto;
+  padding: 20px;
+  line-height: 1.8;
+  background: #fafafa;
+  position: relative;
+}
+
+.fullscreen-mode .scrollable-left,
+.fullscreen-mode .scrollable-right {
+  max-height: calc(100vh - 250px);
+}
+
+/* Custom Scrollbar */
+.scrollable-left::-webkit-scrollbar,
+.scrollable-right::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scrollable-left::-webkit-scrollbar-track,
+.scrollable-right::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.scrollable-left::-webkit-scrollbar-thumb,
+.scrollable-right::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+.scrollable-left::-webkit-scrollbar-thumb:hover,
+.scrollable-right::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+/* Firefox */
+.scrollable-left,
+.scrollable-right {
+  scrollbar-width: thin;
+  scrollbar-color: #667eea #f1f1f1;
+}
+
+/* Content Styling */
+.scrollable-left,
+.scrollable-right .rendered-question {
+  font-family: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #2c3e50;
+}
+
+.scrollable-left h1,
+.scrollable-left h2,
+.scrollable-left h3,
+.scrollable-left h4,
+.scrollable-left h5,
+.scrollable-right h1,
+.scrollable-right h2,
+.scrollable-right h3,
+.scrollable-right h4,
+.scrollable-right h5 {
+  font-weight: 600;
+  color: #2c3e50;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+.scrollable-left p,
+.scrollable-right p {
+  margin-bottom: 1em;
+}
+
+/* Gap Inputs & Dropdowns */
+.gap-input,
+.gap-dropdown {
+  display: inline-block;
+  width: auto;
+  min-width: 50px;
+  max-width: 150px;
+  padding: 6px 10px;
+  border: 2px solid #d9d9d9;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: inherit;
+  transition: all 0.3s;
+  background: #fff;
+  vertical-align: middle;
+  margin: 0 4px;
+}
+
+.gap-input:focus,
+.gap-dropdown:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
+  background: #fff;
+}
+
+.gap-input:disabled,
+.gap-dropdown:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Correct/Incorrect States */
+.gap-input.correct-answer,
+.gap-dropdown.correct-answer {
+  background: #f6ffed;
+  border-color: #52c41a;
+  animation: correctPulse 0.5s ease;
+}
+
+.gap-input.incorrect-answer,
+.gap-dropdown.incorrect-answer {
+  background: #fff2f0;
+  border-color: #ff4d4f;
+  animation: incorrectShake 0.5s ease;
+}
+
+@keyframes correctPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes incorrectShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+/* Correct Answer Hint */
+.correct-answer-hint {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 8px;
+  background: #52c41a;
+  color: white;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Footer */
+.reading-footer {
+  padding: 16px 20px;
+  background: #f8f9fa;
+  border-top: 2px solid #e8e8e8;
+  margin-top: 16px;
+  border-radius: 0 0 8px 8px;
+}
+
+.footer-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #595959;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.footer-info svg {
+  font-size: 18px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .reading-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .controls-left,
+  .controls-right {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .reading-table-header {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+
+  .scrollable-left,
+  .scrollable-right {
+    max-height: 400px;
+    padding: 16px;
+  }
+
+  .gap-input,
+  .gap-dropdown {
+    min-width: 40px;
+    max-width: 100px;
+    padding: 4px 8px;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .reading-controls,
+  .reading-footer {
+    display: none;
+  }
+
+  .scrollable-left,
+  .scrollable-right {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .reading-container {
+    box-shadow: none;
+  }
+}
+
+/* Accessibility */
+.gap-input:focus-visible,
+.gap-dropdown:focus-visible {
+  outline: 3px solid #667eea;
+  outline-offset: 2px;
+}
+
+/* Loading States */
+.gap-input[disabled],
+.gap-dropdown[disabled] {
+  position: relative;
+}
+
+/* Smooth Transitions */
+* {
+  transition: font-size 0.3s ease;
+}

@@ -1,0 +1,94 @@
+/* ======= General Styles ======= */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ======= Table ======= */
+.table {
+    border: 1px solid #dee2e6;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+}
+.table th {
+    background: #343a40;
+    color: #fff;
+    text-align: center;
+}
+.table td {
+    vertical-align: middle;
+    text-align: center;
+}
+.btn {
+    transition: all 0.2s;
+}
+.btn-warning:hover {
+    background: #ffc107;
+}
+.btn-danger:hover {
+    background: #dc3545;
+}
+
+/* ======= Modal ======= */
+/* Modal Full Width */
+.modal.show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-dialog {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    height: auto;
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 100%;
+}
+
+.modal-header {
+    background: #343a40;
+    color: white;
+    border-bottom: 1px solid #495057;
+}
+.modal-body {
+    overflow-y: auto;
+    padding: 20px;
+}
+
+/* ======= Form ======= */
+form .mb-3 {
+    margin-bottom: 1rem;
+}
+input[type="text"],
+input[type="file"],
+button[type="submit"] {
+    border-radius: 4px;
+}
+button[type="submit"] {
+    background: #007bff;
+    color: white;
+    transition: background 0.2s;
+}
+button[type="submit"]:hover {
+    background: #0056b3;
+}
+
+/* ======= Responsive ======= */
+@media (max-width: 768px) {
+    .modal-dialog {
+        max-width: 90%;
+        height: auto;
+    }
+    .modal-content {
+        height: auto;
+        width: 100%;
+    }
+}

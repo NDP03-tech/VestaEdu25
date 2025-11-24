@@ -1,0 +1,68 @@
+.meta-course {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Khoảng cách giữa các mục */
+    flex-wrap: wrap; /* Nếu không đủ chỗ sẽ xuống dòng */
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+.case-title{
+    font-weight: bold;
+}
+.meta-course li {
+    display: flex;
+    align-items: center;
+    
+    gap: 8px; /* Khoảng cách giữa icon và nội dung */
+}
+
+.react-ratings {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.react-book {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.react-ratings .price {
+    font-weight: bold;
+    color: #007bff; /* Màu xanh cho giá tiền */
+    font-size: 1.2rem;
+}
+.single-studies {
+    background: white;
+    border-radius: 12px; /* Bo góc lớn hơn */
+    min-height: 400px;
+    padding: 15px; /* Tăng padding để nội dung rộng hơn */
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15); /* Tăng bóng cho rõ hơn */
+    transform: scale(1.1); /* Phóng to toàn bộ component */
+}
+.single-studies:hover {
+    transform: translateY(-5px); /* Hiệu ứng nổi lên khi hover */
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Đổ bóng mạnh hơn khi hover */
+}
+.case-img img {
+    width: 100%;  /* Để ảnh rộng tối đa */
+    height: auto; /* Giữ tỷ lệ gốc, không bị méo */
+    object-fit: contain; /* Hiển thị toàn bộ ảnh mà không bị cắt */
+    border-radius: 8px; /* Bo góc nhẹ nếu cần */
+}
+.inner-course {
+    padding-bottom: 20px; /* Tạo khoảng trống dưới nội dung */
+}
+.case-content {
+    margin-top: 20px; /* Đẩy nội dung xuống */
+}
+.icon_star{
+color: #d4a017;
+}
+em {
+    color: #d4a017;
+}
