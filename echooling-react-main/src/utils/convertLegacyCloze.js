@@ -95,7 +95,7 @@ function ensureSpacingAfter(el) {
       !/^[\s]*</.test(next.outerHTML) &&
       !next.classList?.contains('hint-wrapper'))
   ) {
-    console.log('🧩 Thêm spacing SAU:', el);
+    
     el.parentNode?.insertBefore(document.createTextNode(' '), next);
   }
 }

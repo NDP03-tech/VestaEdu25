@@ -98,7 +98,7 @@ const AdminCourse = () => {
       if (!response.ok) throw new Error("Failed to fetch courses");
 
       const data = await response.json();
-      console.log("📦 Courses loaded:", data);
+
       setCourses(data);
       setFilteredCourses(data);
     } catch (error) {
@@ -153,7 +153,7 @@ const AdminCourse = () => {
       if (!response.ok) throw new Error("Failed to fetch course");
 
       const courseData = await response.json();
-      console.log("📝 Editing course:", courseData);
+
       setCourseToEdit(courseData);
       setShowModal(true);
       setEditingId(id);
@@ -207,8 +207,6 @@ const AdminCourse = () => {
             : values.schedule,
         createdAt: isEdit ? courseToEdit.createdAt : new Date().toISOString(),
       };
-
-      console.log("📤 Submitting course:", updatedCourse);
 
       const url = isEdit ? `/api/course/${editingId}` : "/api/course/create";
 

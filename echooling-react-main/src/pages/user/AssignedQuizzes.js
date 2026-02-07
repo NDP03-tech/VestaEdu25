@@ -52,8 +52,6 @@ const AssignedQuizzes = () => {
       const userId = user.id;
 
       try {
-        console.log("📡 Fetching assigned quizzes for user:", userId);
-
         const res = await fetch(`/api/assigned-quizzes`, {
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -63,7 +61,6 @@ const AssignedQuizzes = () => {
         }
 
         const quizzesData = await res.json();
-        console.log("📚 Quizzes assigned:", quizzesData);
 
         if (!Array.isArray(quizzesData) || quizzesData.length === 0) {
           setQuizzes([]);
@@ -76,8 +73,6 @@ const AssignedQuizzes = () => {
           quizzesData.map(async (quiz) => {
             try {
               const bestUrl = `/api/results/best-attempts/${quiz.id}`;
-
-              console.log(`🔍 Fetching: ${bestUrl}`);
 
               const bestRes = await fetch(bestUrl, {
                 headers: { Authorization: `Bearer ${token}` },
@@ -95,12 +90,6 @@ const AssignedQuizzes = () => {
               // ✅ Response: { id, score, passed, attemptNumber, answers, ... }
               const bestAttempt = await bestRes.json();
 
-              console.log(`✅ Best attempt for quiz ${quiz.id}:`, {
-                score: bestAttempt.score,
-                passed: bestAttempt.passed,
-                attemptNumber: bestAttempt.attemptNumber,
-              });
-
               // ✅ Để lấy tổng số attempts, cần fetch thêm
               let totalAttempts = bestAttempt.attemptNumber || 0;
 
@@ -114,9 +103,6 @@ const AssignedQuizzes = () => {
                 if (attemptsRes.ok) {
                   const allAttempts = await attemptsRes.json();
                   totalAttempts = allAttempts.length;
-                  console.log(
-                    `📊 Total attempts for quiz ${quiz.id}: ${totalAttempts}`
-                  );
                 }
               } catch (err) {
                 console.log(
@@ -140,7 +126,6 @@ const AssignedQuizzes = () => {
           })
         );
 
-        console.log("🧩 Final quizzes with attempts:", quizzesWithAttempts);
         setQuizzes(quizzesWithAttempts);
       } catch (err) {
         console.error("❌ Error loading quizzes:", err);

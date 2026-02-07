@@ -95,7 +95,7 @@ const AdminEvent = () => {
       if (!response.ok) throw new Error("Failed to fetch events");
 
       const data = await response.json();
-      console.log("📦 Events loaded:", data);
+
       setEvents(data);
       setFilteredEvents(data);
     } catch (error) {
@@ -153,7 +153,7 @@ const AdminEvent = () => {
       if (!response.ok) throw new Error("Failed to fetch event");
 
       const eventData = await response.json();
-      console.log("📝 Editing event:", eventData);
+
       setEventToEdit(eventData);
       setShowModal(true);
       setEditingId(id);
@@ -232,8 +232,6 @@ const AdminEvent = () => {
         // Metadata
         createdAt: isEdit ? eventToEdit.createdAt : new Date().toISOString(),
       };
-
-      console.log("📤 Submitting event:", updatedEvent);
 
       const url = isEdit ? `/api/events/${editingId}` : "/api/events/create";
       const method = isEdit ? "PUT" : "POST";

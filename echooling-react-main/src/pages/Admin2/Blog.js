@@ -85,7 +85,7 @@ const AdminBlog = () => {
       if (!response.ok) throw new Error("Failed to fetch blogs");
 
       const data = await response.json();
-      console.log("📦 Blogs loaded:", data);
+    
       setBlogs(data);
       setFilteredBlogs(data);
     } catch (error) {
@@ -140,7 +140,7 @@ const AdminBlog = () => {
       if (!response.ok) throw new Error("Failed to fetch blog");
 
       const blogData = await response.json();
-      console.log("📝 Editing blog:", blogData);
+     
       setBlogToEdit(blogData);
       setShowModal(true);
       setEditingId(id);

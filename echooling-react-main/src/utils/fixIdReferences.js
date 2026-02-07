@@ -42,13 +42,13 @@ const fixFile = (filePath) => {
     content = content.replace(/\._id/g, '.id');
     
     fs.writeFileSync(fullPath, content);
-    console.log(`✅ Fixed: ${filePath}`);
+   
   } catch (error) {
     console.error(`❌ Error fixing ${filePath}:`, error.message);
   }
 };
 
 // Chạy script
-console.log('🔧 Fixing ID references in React components...');
+
 filesToFix.forEach(fixFile);
-console.log('✅ All files fixed!');
+

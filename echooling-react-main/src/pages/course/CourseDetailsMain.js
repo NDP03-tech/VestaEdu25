@@ -8,7 +8,7 @@ import RegisterForm from '../../components/ResigterForm/RegisterForm.js';
 
 const CourseDetailsMain = () => {
   const { id } = useParams();
-  console.log("CourseDetailsMain id param:", id);
+
   const courseId = id ? id.trim() : '';
 
   const [course, setCourse] = useState(null);
