@@ -11,7 +11,7 @@ const login = async (req, res) => {
     try {
         const user = await User.findOne({ where: { email } });
         if (!user || !(await user.comparePassword(password))) {
-            return res.status(401).json({ message: 'Invalid credentials' });
+            return res.status(401).json({ message: 'Mật khẩu không đúng' });
         }
 
         const token = jwt.sign({ id: user.id, role: user.role }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '4h' });
@@ -28,12 +28,12 @@ const register = async (req, res) => {
     const { email, password, role } = req.body;
     try {
         const existingUser = await User.findOne({ where: { email } });
-        if (existingUser) return res.status(400).json({ message: 'Email already exists' });
+        if (existingUser) return res.status(400).json({ message: 'Email đã tồn tại' });
 
         const user = await User.create({ email, password, role });
-        res.status(201).json({ message: 'User registered successfully' });
+        res.status(201).json({ message: 'Người dùng đã được tạo thành công' });
     } catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: 'Lỗi máy chủ' });
     }
 };
 
@@ -43,7 +43,7 @@ const getUsers = async (req, res) => {
         const users = await User.findAll();
         res.json(users);
     } catch (error) {
-        res.status(500).json({ message: 'Server error' });
+        res.status(500).json({ message: 'Lỗi máy chủ' });
     }
 };
 
@@ -64,7 +64,7 @@ const addUser = async (req, res) => {
 
     try {
         const exists = await User.findOne({ where: { email } });
-        if (exists) return res.status(400).json({ message: 'Email already exists' });
+        if (exists) return res.status(400).json({ message: 'Email đã tồn tại' });
 
         const user = await User.create({
             email,
@@ -79,10 +79,10 @@ const addUser = async (req, res) => {
             address
         });
 
-        res.status(201).json({ message: 'User added successfully', user });
+        res.status(201).json({ message: 'Người dùng đã được thêm thành công', user });
     } catch (error) {
         console.error('Error in addUser:', error);
-        res.status(500).json({ message: 'Server error', error: error.message });
+        res.status(500).json({ message: 'Lỗi máy chủ', error: error.message });
     }
 };
 

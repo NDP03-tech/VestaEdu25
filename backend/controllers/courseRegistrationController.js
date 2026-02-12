@@ -1,7 +1,7 @@
 const CourseRegistration = require('../models/CourseRegistration');
 const { Resend } = require('resend');
 
-const resend = new Resend('re_Gif1Sgsh_HLbXBk17f8EVCMZpJV4kAuzM'); // Hoặc dùng nodemailer nếu bạn sửa được
+const resend = new Resend('re_Gif1Sgsh_HLbXBk17f8EVCMZpJV4kAuzM');
 
 // POST: Người dùng đăng ký
 exports.registerCourse = async (req, res) => {
@@ -18,7 +18,7 @@ exports.registerCourse = async (req, res) => {
     // Gửi email cho admin
     await resend.emails.send({
       from: 'onboarding@resend.dev',
-      to: 'nguyendacphuc2112003@gmail.com',
+      to: 'vestaacademyvn@gmail.com', // ✅ Đã thay đổi
       subject: `🔔 Đăng ký mới: ${courseTitle}`,
       html: `<p><b>${name}</b> vừa đăng ký khóa học <b>${courseTitle}</b>.</p>
              <p>Email: ${email}</p>
@@ -35,7 +35,6 @@ exports.registerCourse = async (req, res) => {
 // GET: Admin lấy danh sách đăng ký
 exports.getAllRegistrations = async (req, res) => {
   try {
-    // Dùng Sequelize để lấy danh sách đăng ký, sắp xếp theo createdAt giảm dần
     const registrations = await CourseRegistration.findAll({ order: [['createdAt', 'DESC']] });
     res.json(registrations);
   } catch (error) {

@@ -23,7 +23,7 @@ exports.registerEvent = async (req, res) => {
     // Gửi email cho admin
     await resend.emails.send({
       from: 'onboarding@resend.dev',
-      to: 'nguyendacphuc2112003@gmail.com',
+      to: 'vestaacademyvn@gmail.com', // ✅ Đã thay đổi
       subject: `🎉 Đăng ký sự kiện mới: ${eventTitle}`,
       html: `<p><b>${name}</b> vừa đăng ký sự kiện <b>${eventTitle}</b>.</p>
              <p>Email: ${email}</p>

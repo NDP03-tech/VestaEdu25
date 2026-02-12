@@ -135,7 +135,7 @@ const AdminBlog = () => {
   const handleEdit = async (id) => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/blog/${id}`);
+      const response = await fetch(`${config.API_URL}/api/blog/${id}`);
 
       if (!response.ok) throw new Error("Failed to fetch blog");
 

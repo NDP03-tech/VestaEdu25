@@ -16,7 +16,7 @@ const resultRoutes = require("./routes/userQuizResultRoutes");
 const eventRegistrationRoutes = require("./routes/eventRegistration");
 const uploadRoute = require("./routes/uploadRoute");
 const courseRegistrationRoutes = require("./routes/courseRegistrationRoutes");
-const instructorRoutes = require("./routes/instructorRoutes"); // 👈 THÊM DÒNG NÀY
+const instructorRoutes = require("./routes/instructorRoutes");
 const { sequelize } = require("./models");
 const app = express();
 const path = require("path");
@@ -25,16 +25,39 @@ const path = require("path");
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
-// CORS
+// CORS - Tự động hỗ trợ cả development và production
+const allowedOrigins = 
+  process.env.NODE_ENV === 'production'
+    ? [
+        "https://vestaedu.online",
+        "https://www.vestaedu.online",
+      ]
+    : [
+        "http://localhost:3000",
+        "http://localhost:3001",
+        "http://localhost:3002",
+        "http://localhost:5000", 
+      ];
+
 app.use(
   cors({
-    origin: [
-      "https://vestaedu.online",
-      "http://localhost:3000",
-      "http://localhost:3001",
-    ],
+    origin: function (origin, callback) {
+      // Cho phép requests không có origin (mobile apps, Postman, etc.)
+      if (!origin) return callback(null, true);
+      
+      // ✅ BỎ DẤU "/" Ở CUỐI NẾU CÓ
+      const normalizedOrigin = origin.replace(/\/$/, '');
+      
+      if (allowedOrigins.indexOf(normalizedOrigin) !== -1) {
+        callback(null, true);
+      } else {
+        console.log("❌ CORS blocked origin:", origin);
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
@@ -46,7 +69,12 @@ sequelize
   .authenticate()
   .then(() => {
     console.log("✅ Connected to MySQL database");
-    return sequelize.sync({ alter: true });
+    // Chỉ sync khi development
+    if (process.env.NODE_ENV !== 'production') {
+      return sequelize.sync({ alter: false  });
+    } else {
+      return sequelize.sync({ alter: false });
+    }
   })
   .then(() => {
     console.log("✅ Database synchronized");
@@ -69,7 +97,7 @@ app.use("/api/course-registrations", courseRegistrationRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/event-registrations", eventRegistrationRoutes);
 app.use("/api/assigned-quizzes", assignedQuizRoutes);
-app.use("/api/instructors", instructorRoutes); // 👈 THÊM DÒNG NÀY
+app.use("/api/instructors", instructorRoutes);
 
 // Static files - serve uploads
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
@@ -77,10 +105,17 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Route upload media
 app.use("/api", uploadRoute);
 
+// Health check endpoint
+app.get("/health", (req, res) => {
+  res.json({ status: "OK", timestamp: new Date() });
+});
+
 // Khởi động server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
-  console.log("🔍 Database:", process.env.DB_NAME || "edu_database");
+  console.log("📊 Database:", process.env.DB_NAME || "edu_database");
   console.log("📁 Uploads directory:", path.join(__dirname, "uploads"));
+  console.log("🌍 Environment:", process.env.NODE_ENV || "development");
+  console.log("✅ Allowed Origins:", allowedOrigins);
 });

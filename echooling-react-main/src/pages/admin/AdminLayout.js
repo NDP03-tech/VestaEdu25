@@ -33,6 +33,7 @@ const AdminLayout = () => {
     "/admin/adminBlog": "Blog Management",
     "/admin/adminCourse": "Course Management",
     "/admin/adminEvent": "Event Management",
+    "/admin/instructors": "Instructor Management",
     "/admin/quiz-manage": "Quiz Management",
     "/admin/classes": "Class Management",
     "/admin/categories": "Category Management",
@@ -121,6 +122,11 @@ const AdminLayout = () => {
       key: "/admin/categories",
       icon: <FolderOutlined style={{ fontSize: 16 }} />,
       label: "Categories",
+    },
+     {
+      key: "/admin/instructors",
+      icon: <FolderOutlined style={{ fontSize: 16 }} />,
+      label: "Instructors",
     },
   ];
 

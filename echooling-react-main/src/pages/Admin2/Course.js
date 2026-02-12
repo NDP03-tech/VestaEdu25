@@ -148,7 +148,7 @@ const AdminCourse = () => {
   const handleEdit = async (id) => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/course/${id}`);
+      const response = await fetch(`${config.API_URL}/api/course/${id}`);
 
       if (!response.ok) throw new Error("Failed to fetch course");
 

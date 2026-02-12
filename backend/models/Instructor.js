@@ -30,26 +30,47 @@ const Instructor = sequelize.define(
       defaultValue: "default-instructor.jpg",
     },
     facebook: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      validate: {
-        isUrl: true,
-      },
+  type: DataTypes.STRING(255),
+  allowNull: true,
+  validate: {
+    isUrlIfNotEmpty(value) {
+      if (!value) return; // null hoặc "" → bỏ qua validate
+      const urlRegex = /^(https?:\/\/)[^\s$.?#].[^\s]*$/i;
+      if (!urlRegex.test(value)) {
+        throw new Error("Facebook phải là URL hợp lệ");
+      }
     },
-    twitter: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      validate: {
-        isUrl: true,
-      },
+  },
+},
+
+twitter: {
+  type: DataTypes.STRING(255),
+  allowNull: true,
+  validate: {
+    isUrlIfNotEmpty(value) {
+      if (!value) return;
+      const urlRegex = /^(https?:\/\/)[^\s$.?#].[^\s]*$/i;
+      if (!urlRegex.test(value)) {
+        throw new Error("Twitter phải là URL hợp lệ");
+      }
     },
-    linkedin: {
-      type: DataTypes.STRING(255),
-      allowNull: true,
-      validate: {
-        isUrl: true,
-      },
+  },
+},
+
+linkedin: {
+  type: DataTypes.STRING(255),
+  allowNull: true,
+  validate: {
+    isUrlIfNotEmpty(value) {
+      if (!value) return;
+      const urlRegex = /^(https?:\/\/)[^\s$.?#].[^\s]*$/i;
+      if (!urlRegex.test(value)) {
+        throw new Error("Linkedin phải là URL hợp lệ");
+      }
     },
+  },
+},
+
     email: {
       type: DataTypes.STRING(255),
       allowNull: true,

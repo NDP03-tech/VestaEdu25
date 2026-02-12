@@ -27,6 +27,7 @@ import LoadTop from "../components/ScrollTop/LoadTop";
 import AdminCourses from "../pages/Admin2/Course";
 import UserTestComponent from "../pages/baitest/UserTestComponent";
 import AdminBlog from "../pages/Admin2/Blog";
+import AdminInstructor from "../pages/Admin2/Instructor";
 import AdminEvent from "../pages/Admin2/Event";
 import QuizManage from "../pages/QuizManage";
 import Classes from "../pages/Classes.js";
@@ -135,6 +136,7 @@ const App = () => {
               <Route path="adminUser" element={<UserManagement />} />
               <Route path="adminEvent" element={<AdminEvent />} />
               <Route path="adminBlog" element={<AdminBlog />} />
+              <Route path="instructors" element={<AdminInstructor />} />
               <Route path="adminCourse" element={<AdminCourses />} />
               <Route path="grades/:userId" element={<GradesPage />} />
 

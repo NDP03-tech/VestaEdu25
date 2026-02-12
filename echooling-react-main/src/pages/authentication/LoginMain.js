@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Navigate } from 'react-router-dom';
-
+import config from '../../config';
 const LoginMain = ({ onLogin, setIsLoggedIn }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,7 +13,7 @@ const LoginMain = ({ onLogin, setIsLoggedIn }) => {
         setMessage('');
 
         try {
-            const res = await axios.post('api/login', { email, password });
+            const res = await axios.post(`${config.API_URL}/api/login`, { email, password });
             localStorage.setItem('token', res.data.token);
             localStorage.setItem('role', res.data.user.role);
             localStorage.setItem('user', JSON.stringify(res.data.user));
