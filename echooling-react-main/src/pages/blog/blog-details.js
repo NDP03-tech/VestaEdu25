@@ -6,7 +6,7 @@ import BlogDetailsMain from './BlogDetailsMain';
 import Breadcrumb from '../../components/Breadcrumb/BlogBreadcrumbs';
 import ScrollToTop from '../../components/ScrollTop';
 import Logo from '../../assets/images/logos/logo2.png';
-
+import config from '../../config';
 const BlogDetails = () => {
     const { id } = useParams(); // Lấy ID từ URL
     const [post, setPost] = useState(null);
@@ -22,7 +22,7 @@ const BlogDetails = () => {
             }
         
             try {
-                const response = await fetch(`/api/blog/${id}`); // Gọi API với id
+                const response = await fetch(`${config.API_URL}/api/blog/${id}`); // Gọi API với id
                 if (!response.ok) {
                     const errorData = await response.json();
                     throw new Error(errorData.message || 'Không thể tải dữ liệu bài viết');

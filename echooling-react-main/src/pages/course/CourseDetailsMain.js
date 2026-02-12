@@ -5,7 +5,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import listPlugin from '@fullcalendar/list';
 import RegisterForm from '../../components/ResigterForm/RegisterForm.js';
-
+import config from '../../config.js'; 
 const CourseDetailsMain = () => {
   const { id } = useParams();
 
@@ -19,7 +19,7 @@ const CourseDetailsMain = () => {
   useEffect(() => {
     const fetchCourse = async () => {
       try {
-        const response = await fetch(`/api/course/${courseId}`);
+        const response = await fetch(`${config.API_URL}/api/course/${courseId}`);
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.message || "Failed to fetch course data.");

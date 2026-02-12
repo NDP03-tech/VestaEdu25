@@ -6,7 +6,7 @@ import QuizStartScreen from "../components/QuizUI/QuizStartScreen";
 import QuizRunner from "../components/QuizUI/QuizRunner";
 import QuizSubmitScreen from "../components/QuizUI/QuizSubmitScreen";
 import { Button } from "antd";
-
+import config from '../config';
 const QuizPreviewWrapper = () => {
   const { quizId } = useParams();
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ const QuizPreviewWrapper = () => {
       try {
         const [fetchedQuiz, fetchedQuestions] = await Promise.all([
           quizService.getQuizById(quizId),
-          fetch(`/api/questions/by-quiz/${quizId}`).then((r) => r.json()),
+          fetch(`${config.API_URL}/api/questions/by-quiz/${quizId}`).then((r) => r.json()),
         ]);
 
         if (cancelled) return;
@@ -50,7 +50,7 @@ const QuizPreviewWrapper = () => {
         setQuestions(fetchedQuestions);
 
         const token = localStorage.getItem("token");
-        let latestRes = await fetch(`/api/results/latest/${quizId}`, {
+        let latestRes = await fetch(`${config.API_URL}/api/results/latest/${quizId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         let latestData = await latestRes.json();
@@ -65,7 +65,7 @@ const QuizPreviewWrapper = () => {
             console.log(
               `🔁 Found stored latestResultId in localStorage: ${storedResultId}. Fetching that result...`
             );
-            const fetchStored = await fetch(`/api/results/${storedResultId}`, {
+            const fetchStored = await fetch(`${config.API_URL}/api/results/${storedResultId}`, {
               headers: { Authorization: `Bearer ${token}` },
             });
             const storedData = await fetchStored.json();
@@ -81,7 +81,7 @@ const QuizPreviewWrapper = () => {
         // 🧠 Nếu không có result thì tạo mới
         if (!latestData || latestData.error) {
           console.log("🚀 No latest result found, creating a new attempt...");
-          const startRes = await fetch(`/api/results/start/${quizId}`, {
+          const startRes = await fetch(`${config.API_URL}/api/results/start/${quizId}`, {
             method: "POST",
             headers: { Authorization: `Bearer ${token}` },
           });
@@ -177,7 +177,7 @@ const QuizPreviewWrapper = () => {
           "unknown",
       }));
 
-    fetch(`/api/results/temp/${result.id}`, {
+    fetch(`${config.API_URL}/api/results/temp/${result.id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -200,7 +200,7 @@ const QuizPreviewWrapper = () => {
 
     if (!result?.id) {
       console.warn("⚠️ result.id missing — creating one now...");
-      const startRes = await fetch(`/api/results/start/${quizId}`, {
+      const startRes = await fetch(`${config.API_URL}/api/results/start/${quizId}`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -220,14 +220,14 @@ const QuizPreviewWrapper = () => {
     }));
 
     try {
-      let submitUrl = `/api/results/submit/${result.id}`;
+      let submitUrl = `${config.API_URL}/api/results/submit/${result.id}`;
       let currentResult = result;
 
       if (result.submittedAt) {
         console.log(
           "🔁 Current result already submitted — creating new attempt before submit..."
         );
-        const startRes = await fetch(`/api/results/start/${quizId}`, {
+        const startRes = await fetch(`${config.API_URL}/api/results/start/${quizId}`, {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
         });
@@ -238,7 +238,7 @@ const QuizPreviewWrapper = () => {
         }
         setResult(currentResult);
         setAttemptNumber(currentResult.attemptNumber || 1);
-        submitUrl = `/api/results/submit/${currentResult.id}`;
+        submitUrl = `${config.API_URL}/api/results/submit/${currentResult.id}`;
       }
 
       console.log("📤 Submitting answers to:", submitUrl);
@@ -381,7 +381,7 @@ const QuizPreviewWrapper = () => {
             onClick={async () => {
               const token = localStorage.getItem("token");
               console.log("🔁 User requested retry, creating new attempt...");
-              const startRes = await fetch(`/api/results/start/${quizId}`, {
+              const startRes = await fetch(`${config.API_URL}/api/results/start/${quizId}`, {
                 method: "POST",
                 headers: { Authorization: `Bearer ${token}` },
               });

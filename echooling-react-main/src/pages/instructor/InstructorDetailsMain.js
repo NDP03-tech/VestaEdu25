@@ -8,7 +8,7 @@ import "./InstructorDetailsMain.css";
 import countIcon1 from "../../assets/images/profile/2.png";
 import countIcon2 from "../../assets/images/profile/3.png";
 import countIcon3 from "../../assets/images/profile/4.png";
-
+import config from "../../config";
 const InstructorDetailsMain = () => {
   const location = useLocation();
   const postURL = location.pathname.split("/");
@@ -23,7 +23,7 @@ const InstructorDetailsMain = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const response = await fetch("/api/course/");
+        const response = await fetch(`${config.API_URL}/api/course/`);
         const data = await response.json();
         setCourses(data);
       } catch (error) {

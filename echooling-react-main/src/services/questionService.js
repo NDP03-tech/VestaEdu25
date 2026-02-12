@@ -1,7 +1,8 @@
 // src/services/questionService.js
 import axios from 'axios';
+import config from '../config';
 
-const API_URL = '/api'; // Địa chỉ API của bạn
+const API_URL = `${config.API_URL}/api`; // Sử dụng API_URL từ config
 
 // Lấy tất cả Question
 const getAllQuestions = async () => {
@@ -25,7 +26,6 @@ const getQuestionsByQuizId = async (quizId) => {
     throw error;
   }
 };
-
 
 // Lấy Question theo ID
 const getQuestionById = async (id) => {

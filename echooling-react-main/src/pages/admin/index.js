@@ -11,7 +11,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import DashboardStatCard from './DashboardStatCard';
 import RegistrationTableTabs from './RegistrationTableTabs';
-
+import config from '../../config';
 const { Title, Paragraph } = Typography;
 
 const Dashboard = () => {
@@ -27,7 +27,7 @@ const Dashboard = () => {
     const fetchStats = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await fetch('/api/dashboard/stats', {
+        const res = await fetch(`${config.API_URL}/api/dashboard/stats`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -54,7 +54,7 @@ const Dashboard = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const res = await fetch('/api/quizzes', {
+      const res = await fetch(`${config.API_URL}/api/quizzes`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

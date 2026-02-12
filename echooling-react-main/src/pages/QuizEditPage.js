@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import config from "../config";
 const QuizEditPage = () => {
   const { quizId } = useParams();
   const navigate = useNavigate();
@@ -11,7 +11,7 @@ const QuizEditPage = () => {
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
-        const res = await axios.get(`/api/quizzes/${quizId}`);
+        const res = await axios.get(`${config.API_URL}/api/quizzes/${quizId}`);
         setQuiz(res.data);
         setForm({ title: res.data.title, description: res.data.description });
       } catch (err) {
@@ -28,7 +28,7 @@ const QuizEditPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`/api/quizzes/${quizId}`, form);
+      await axios.put(`${config.API_URL}/api/quizzes/${quizId}`, form);
       alert("✅ Cập nhật thành công!");
       navigate("/quizzes");
     } catch (err) {

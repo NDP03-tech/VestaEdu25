@@ -39,7 +39,7 @@ import {
 import { getId } from "../../utils/idHelper";
 import dayjs from "dayjs";
 import "./AdminEvent.css";
-
+import config from '../../config';
 const { Title, Text } = Typography;
 
 const AdminEvent = () => {
@@ -88,7 +88,7 @@ const AdminEvent = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("/api/events", {
+      const response = await fetch(`${config.API_URL}/api/events`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -111,7 +111,7 @@ const AdminEvent = () => {
     formData.append("file", file);
 
     try {
-      const response = await fetch("/api/upload-media", {
+      const response = await fetch(`${config.API_URL}/api/upload-media`, {
         method: "POST",
         body: formData,
       });
@@ -148,7 +148,7 @@ const AdminEvent = () => {
   const handleEdit = async (id) => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/events/${id}`);
+      const response = await fetch(`${config.API_URL}/api/events/${id}`);
 
       if (!response.ok) throw new Error("Failed to fetch event");
 
@@ -169,7 +169,7 @@ const AdminEvent = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`/api/events/${id}`, {
+      const response = await fetch(`${config.API_URL}/api/events/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -233,7 +233,7 @@ const AdminEvent = () => {
         createdAt: isEdit ? eventToEdit.createdAt : new Date().toISOString(),
       };
 
-      const url = isEdit ? `/api/events/${editingId}` : "/api/events/create";
+      const url = isEdit ? `${config.API_URL}/api/events/${editingId}` : `${config.API_URL}/api/events/create`;
       const method = isEdit ? "PUT" : "POST";
       const token = localStorage.getItem("token");
 

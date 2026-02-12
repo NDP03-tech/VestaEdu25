@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import QuizPreview from "../components/QuizPreview";
 import './QuizPreview.css';
+import config from '../config';
 const QuizPreviewPage = () => {
   const { quizId } = useParams();
   const [quiz, setQuiz] = useState(null);
@@ -10,7 +11,7 @@ const QuizPreviewPage = () => {
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
-        const response = await axios.get(`/api/quizzes/${quizId}`);
+        const response = await axios.get(`${config.API_URL}/api/quizzes/${quizId}`);
         setQuiz(response.data);
         console.log("✅ Quiz response:", response.data); // DÒNG NÀY
       } catch (err) {

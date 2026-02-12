@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import './BlogMain.css'; // Import CSS file
-
+import config from '../../config';
 const BlogMain = () => {
     const itemsPerPage = 4; // Số bài viết mỗi trang
     const [currentPage, setCurrentPage] = useState(0);
@@ -13,7 +13,7 @@ const BlogMain = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await fetch('/api/blog'); // Thay đổi URL API theo backend của bạn
+                const response = await fetch(`${config.API_URL}/api/blog`); // Thay đổi URL API theo backend của bạn
                 if (!response.ok) {
                     throw new Error('Đã xảy ra lỗi khi lấy dữ liệu');
                 }

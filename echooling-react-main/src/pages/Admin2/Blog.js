@@ -36,7 +36,7 @@ import {
 import { getId } from "../../utils/idHelper";
 import dayjs from "dayjs";
 import "./AdminBlog.css";
-
+import config from '../../config';
 const { Title, Text, Paragraph } = Typography;
 
 const AdminBlog = () => {
@@ -78,7 +78,7 @@ const AdminBlog = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("/api/blog", {
+      const response = await fetch(`${config.API_URL}/api/blog`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -101,7 +101,7 @@ const AdminBlog = () => {
     formData.append("file", file);
 
     try {
-      const response = await fetch("/api/upload-media", {
+      const response = await fetch(`${config.API_URL}/api/upload-media`, {
         method: "POST",
         body: formData,
       });
@@ -156,7 +156,7 @@ const AdminBlog = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`/api/blog/${id}`, {
+      const response = await fetch(`${config.API_URL}/api/blog/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -193,7 +193,7 @@ const AdminBlog = () => {
 
       console.log("📤 Submitting blog:", updatedBlog);
 
-      const url = isEdit ? `/api/blog/${editingId}` : "/api/blog/create";
+      const url = isEdit ? `${config.API_URL}/api/blog/${editingId}` : `${config.API_URL}/api/blog/create`;
 
       const method = isEdit ? "PUT" : "POST";
       const token = localStorage.getItem("token");

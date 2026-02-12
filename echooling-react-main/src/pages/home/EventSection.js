@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import SectionTitle from '../../components/SectionTitle';
 import SingleEvent from '../../components/Event/SingleEvent.js'
-
+import config from '../../config.js';
 const Event = () => {
     const [events, setEvents] = useState([]);
 
@@ -35,7 +35,7 @@ const Event = () => {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await axios.get('/api/events');
+                const response = await axios.get(`${config.API_URL}/api/events`);
                 
                 // Đảm bảo dữ liệu là mảng
                 if (Array.isArray(response.data)) {

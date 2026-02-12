@@ -39,6 +39,7 @@ import {
   Divider,
   Popconfirm,
 } from "antd";
+import config from "../config";
 
 const { Title, Text } = Typography;
 
@@ -75,12 +76,12 @@ const ClassDetail = () => {
 
       console.log("🔄 Fetching class details...");
 
-      const classRes = await axios.get(`/api/classes/${id}`, {
+      const classRes = await axios.get(`${config.API_URL}/api/classes/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setClassInfo(classRes.data);
 
-      const studentsRes = await axios.get(`/api/classes/${id}/students`, {
+      const studentsRes = await axios.get(`${config.API_URL}/api/classes/${id}/students`, {
         headers: { Authorization: `Bearer ${token}` },
         params: { _t: Date.now() },
       });
@@ -110,7 +111,7 @@ const ClassDetail = () => {
       setSubmitting(true);
       const token = localStorage.getItem("token");
 
-      await axios.put(`/api/users/${editingStudent.id}`, values, {
+      await axios.put(`${config.API_URL}/api/users/${editingStudent.id}`, values, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -130,7 +131,7 @@ const ClassDetail = () => {
     try {
       const token = localStorage.getItem("token");
 
-      await axios.delete(`/api/classes/${id}/students/${studentId}`, {
+      await axios.delete(`${config.API_URL}/api/classes/${id}/students/${studentId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -152,7 +153,7 @@ const ClassDetail = () => {
 
       await Promise.all(
         selectedIds.map((studentId) =>
-          axios.delete(`/api/classes/${id}/students/${studentId}`, {
+          axios.delete(`${config.API_URL}/api/classes/${id}/students/${studentId}`, {
             headers: { Authorization: `Bearer ${token}` },
           })
         )
@@ -170,7 +171,7 @@ const ClassDetail = () => {
   const openAddModal = async () => {
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get(`/api/users`, {
+      const res = await axios.get(`${config.API_URL}/api/users`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -200,7 +201,7 @@ const ClassDetail = () => {
       console.log("📝 Adding students:", selectedToAdd);
 
       await axios.post(
-        `/api/classes/${id}/students`,
+        `${config.API_URL}/api/classes/${id}/students`,
         { studentIds: selectedToAdd },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -232,7 +233,7 @@ const ClassDetail = () => {
 
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get(`/api/classes`, {
+      const res = await axios.get(`${config.API_URL}/api/classes`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -255,7 +256,7 @@ const ClassDetail = () => {
       const token = localStorage.getItem("token");
 
       await axios.post(
-        `/api/classes/move-students`,
+        `${config.API_URL}/api/classes/move-students`,
         {
           studentIds: selectedIds,
           fromClassId: parseInt(id),

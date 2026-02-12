@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import quizService from "../services/quizService";
+import config from "../config";
 
 import QuizStartScreen from "../components/QuizUI/QuizStartScreen";
 import QuizRunner from "../components/QuizUI/QuizRunner";
@@ -30,14 +31,14 @@ const QuizPreviewWrapper = () => {
       try {
         const [fetchedQuiz, fetchedQuestions] = await Promise.all([
           quizService.getQuizById(quizId),
-          fetch(`/api/questions/by-quiz/${quizId}`).then(res => res.json()),
+          fetch(`${config.API_URL}/api/questions/by-quiz/${quizId}`).then(res => res.json()),
         ]);
 
         setQuiz(fetchedQuiz);
         setQuestions(fetchedQuestions);
 
         const token = localStorage.getItem("token");
-        const res = await fetch(`/api/results/latest/${quizId}`, {
+        const res = await fetch(`${config.API_URL}/api/results/latest/${quizId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();
@@ -62,7 +63,7 @@ const QuizPreviewWrapper = () => {
   const handleStart = async () => {
     const token = localStorage.getItem("token");
     try {
-      const res = await fetch(`/api/results/start/${quizId}`, {
+      const res = await fetch(`${config.API_URL}/api/results/start/${quizId}`, {
         method: "POST",
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -90,7 +91,7 @@ const QuizPreviewWrapper = () => {
       }));
 
     if (result?.id) {
-      fetch(`/api/results/temp/${result.id}`, {
+      fetch(`${config.API_URL}/api/results/temp/${result.id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -112,7 +113,7 @@ const QuizPreviewWrapper = () => {
       }));
 
     try {
-      const res = await fetch(`/api/results/submit/${result.id}`, {
+      const res = await fetch(`${config.API_URL}/api/results/submit/${result.id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

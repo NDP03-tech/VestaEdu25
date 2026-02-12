@@ -1,6 +1,7 @@
 import axios from 'axios';
+import config from '../config';
 
-const API_URL = '/api'; // URL của API (thay đổi theo đúng địa chỉ của bạn)
+const API_URL = `${config.API_URL}/api`; // Sử dụng API_URL từ config
 
 const getQuizzes = async () => {
   try {

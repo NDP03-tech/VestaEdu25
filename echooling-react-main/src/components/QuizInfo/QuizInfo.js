@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import config from "../../config";
 import {
   Card,
   Input,
@@ -30,7 +31,6 @@ import ExplanationEditor from "../Explanation/ExplanationEditor";
 const { Title, Text } = Typography;
 const { Option } = Select;
 const { Panel } = Collapse;
-
 const defaultSettings = {
   oneQuestionPerPage: false,
   showQuestionNumbers: true,
@@ -67,7 +67,7 @@ const QuizInfo = ({ onQuizInfoChange, quizId }) => {
   useEffect(() => {
     if (quizId) {
       axios
-        .get(`/api/quizzes/${quizId}`)
+        .get(`${config.API_URL}/api/quizzes/${quizId}`)
         .then((response) => {
           const quiz = response.data;
           setTitle(quiz.title || "");
@@ -95,7 +95,7 @@ const QuizInfo = ({ onQuizInfoChange, quizId }) => {
 
   useEffect(() => {
     axios
-      .get("/api/categories")
+      .get(`${config.API_URL}/api/categories`)
       .then((res) => setCategories(res.data.map((c) => c.name)))
       .catch((err) => console.error("Lỗi khi lấy danh mục:", err));
   }, []);
@@ -103,7 +103,7 @@ const QuizInfo = ({ onQuizInfoChange, quizId }) => {
   useEffect(() => {
     if (visibleTo === "classes") {
       axios
-        .get("/api/classes")
+        .get(`${config.API_URL}/api/classes`)
         .then((res) => setAvailableClasses(res.data))
         .catch((err) => console.error("Lỗi khi lấy danh sách lớp:", err));
     }
@@ -113,7 +113,7 @@ const QuizInfo = ({ onQuizInfoChange, quizId }) => {
     if (quizId && assignedClasses.length > 0) {
       assignedClasses.forEach((classId) => {
         axios
-          .post(`/api/classes/${classId}/add-quiz`, { quizId })
+          .post(`${config.API_URL}/api/classes/${classId}/add-quiz`, { quizId })
           .catch((err) => console.error("Không thể gán quiz vào class:", err));
       });
     }
@@ -121,7 +121,7 @@ const QuizInfo = ({ onQuizInfoChange, quizId }) => {
 
   const handleSaveCategory = async () => {
     try {
-      const res = await axios.post("/api/categories", {
+      const res = await axios.post(`${config.API_URL}/api/categories`, {
         name: newCategory,
       });
       const newCat = res.data.name;
@@ -136,7 +136,7 @@ const QuizInfo = ({ onQuizInfoChange, quizId }) => {
   };
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(`http://yourdomain.com/quiz/${quizId}`);
+    navigator.clipboard.writeText(`https://vestaedu.online/quiz/${quizId}`);
     message.success("Link copied to clipboard!");
   };
 
@@ -471,7 +471,7 @@ const QuizInfo = ({ onQuizInfoChange, quizId }) => {
               </Text>
               <Space.Compact style={{ width: "100%" }}>
                 <Input
-                  value={`http://yourdomain.com/quiz/${quizId}`}
+                  value={`https://vestaedu.online/quiz/${quizId}`}
                   disabled
                   style={{ fontFamily: "monospace" }}
                 />

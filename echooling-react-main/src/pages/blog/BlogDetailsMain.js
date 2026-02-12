@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import config from '../../config';
 const BlogMain = ({ postTitle, postImg, postContent, currentPostId }) => {
     const [relatedPosts, setRelatedPosts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -9,7 +9,7 @@ const BlogMain = ({ postTitle, postImg, postContent, currentPostId }) => {
     useEffect(() => {
         const fetchRelatedPosts = async () => {
             try {
-                const response = await fetch('/api/blog');
+                const response = await fetch(`${config.API_URL}/api/blog`);
                 if (!response.ok) {
                     throw new Error('Không thể tải dữ liệu bài viết');
                 }

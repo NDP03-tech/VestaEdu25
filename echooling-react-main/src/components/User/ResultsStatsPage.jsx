@@ -29,6 +29,7 @@ import {
   Area,
   AreaChart,
 } from "recharts";
+import config from "../../config";
 
 const { Title, Text } = Typography;
 
@@ -39,7 +40,7 @@ const ResultsStatsPage = () => {
   useEffect(() => {
     const token = localStorage.getItem("token");
 
-    fetch("/api/results/user/results-stats", {
+    fetch(`${config.API_URL}/api/results/user/results-stats`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

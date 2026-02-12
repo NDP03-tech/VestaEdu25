@@ -5,6 +5,8 @@ import { subDays } from "date-fns";
 import UserHeader from "../../components/User/userHeader";
 import QuoteOfTheDay from "../../components/QuoteOfTheDay";
 import { TrendingUp, Calendar, Award, Zap } from "lucide-react";
+import config from "../../config";
+
 
 const UserDashboard = () => {
   const [activityData, setActivityData] = useState([]);
@@ -16,7 +18,7 @@ const UserDashboard = () => {
   });
 
   const fetchQuizzesWithLatestAttempts = async (userId, token) => {
-    const res = await fetch(`/api/${userId}/quizzes`, {
+    const res = await fetch(`${config.API_URL}/api/${userId}/quizzes`, {
       headers: { Authorization: `Bearer ${token}` },
     });
 
@@ -24,7 +26,7 @@ const UserDashboard = () => {
 
     const enriched = await Promise.all(
       quizzes.map(async (quiz) => {
-        const attemptRes = await fetch(`/api/results/latest/${quiz.id}`, {
+        const attemptRes = await fetch(`${config.API_URL}/api/results/latest/${quiz.id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const latestAttempt = await attemptRes.json();

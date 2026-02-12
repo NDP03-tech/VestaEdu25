@@ -6,6 +6,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { DownloadOutlined, ArrowLeftOutlined } from "@ant-design/icons";
+import config from "../config";
 
 const { Title, Text } = Typography;
 
@@ -29,7 +30,7 @@ const QuizResultTable = () => {
     try {
       const token = localStorage.getItem("token");
       const res = await axios.get(
-        `/api/results/user/${userId}/quiz/${quizId}/best-attempt`,
+        `${config.API_URL}/api/results/user/${userId}/quiz/${quizId}/best-attempt`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

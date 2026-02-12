@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import config from "../config";
 const EditQuiz = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -14,14 +14,14 @@ const EditQuiz = () => {
   const fetchQuiz = async () => {
     try {
       // 1. Lấy quiz info
-      const res = await axios.get(`/api/quizzes/${id}`);
+      const res = await axios.get(`${config.API_URL}/api/quizzes/${id}`);
       setForm({
         title: res.data.title || "",
         description: res.data.description || "",
       });
   
       // 2. Lấy danh sách câu hỏi theo quizId
-      const questionRes = await axios.get(`/api/questions/by-quiz/${id}`);
+      const questionRes = await axios.get(`${config.API_URL}/api/questions/by-quiz/${id}`);
       console.log("📦 Questions:", questionRes.data);
       setQuestions(questionRes.data); // <-- Gán mảng câu hỏi từ API này
   
@@ -56,7 +56,7 @@ const EditQuiz = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put(`/api/quizzes/${id}`, {
+      const res = await axios.put(`${config.API_URL}/api/quizzes/${id}`, {
         ...form,
         questions,
       });

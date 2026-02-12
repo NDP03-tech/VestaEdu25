@@ -4,7 +4,7 @@ import ReactPaginate from 'react-paginate';
 import SectionTitle from '../../components/SectionTitle';
 import SingleCourseThreeCustom from '../../components/Course/SingleCourseThreeCustom';
 import axios from 'axios';
-
+import config from '../../config';
 const itemsPerPage = 3;
 
 const Course = () => {
@@ -15,7 +15,7 @@ const Course = () => {
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-                const res = await axios.get('/api/course/');
+                const res = await axios.get(`${config.API_URL}/api/course/`);
                 // Đảm bảo luôn là mảng
                 setCourses(Array.isArray(res.data) ? res.data : []);
             } catch (err) {

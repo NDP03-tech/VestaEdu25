@@ -36,7 +36,7 @@ import {
 } from "@ant-design/icons";
 import axios from "axios";
 import { mapWithKey, getId } from "../../utils/idHelper";
-
+import config from '../../config';
 const { Title, Text } = Typography;
 const { Option } = Select;
 
@@ -126,7 +126,7 @@ const UserManager = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await axios.get("/api/users", {
+      const res = await axios.get(`${config.API_URL}/api/users`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -150,12 +150,12 @@ const UserManager = () => {
     try {
       const token = localStorage.getItem("token");
       if (editingUser) {
-        await axios.put(`/api/users/${getId(editingUser)}`, values, {
+        await axios.put(`${config.API_URL}/api/users/${getId(editingUser)}`, values, {
           headers: { Authorization: `Bearer ${token}` },
         });
         message.success("User updated successfully!");
       } else {
-        await axios.post("/api/users", values, {
+        await axios.post(`${config.API_URL}/api/users`, values, {
           headers: { Authorization: `Bearer ${token}` },
         });
         message.success("User created successfully!");
@@ -187,7 +187,7 @@ const UserManager = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`/api/users/${id}`, {
+      await axios.delete(`${config.API_URL}/api/users/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       message.success("User deleted successfully!");

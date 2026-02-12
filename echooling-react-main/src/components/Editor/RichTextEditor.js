@@ -2,6 +2,7 @@ import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { convertOldClozeDropLinks } from '../../utils/convertLegacyCloze.js'; 
 import './styles.css';
+import config from '../../config';
 const RichTextEditor = ({ value, onChange, onCreateGap, onCreateMultipleGap, onDeleteGap, onAddHint, onCreateDropdown }) => {
   console.log("📥 Editor receives value:", value);
   
@@ -117,7 +118,7 @@ const RichTextEditor = ({ value, onChange, onCreateGap, onCreateMultipleGap, onD
                   const formData = new FormData();
                   formData.append('file', file);
           
-                  fetch('/api/upload-media', {
+                  fetch(`${config.API_URL}/api/upload-media`, {
                     method: 'POST',
                     body: formData
                   })
@@ -150,14 +151,14 @@ const RichTextEditor = ({ value, onChange, onCreateGap, onCreateMultipleGap, onD
           
           
         // ** Cấu hình upload ảnh **
-        images_upload_url: '/api/upload-media',
+        images_upload_url: `${config.API_URL}/api/upload-media`,
  // URL backend upload ảnh
 
  images_upload_handler: (blobInfo, success, failure) => {
   const formData = new FormData();
   formData.append('file', blobInfo.blob(), blobInfo.filename());
 
-  fetch('/api/upload-media', {
+  fetch(`${config.API_URL}/api/upload-media`, {
     method: 'POST',
     body: formData,
   })

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import SingleEvent from '../../components/Event/SingleEvent';
 import axios from 'axios';
-
+import config from '../../config';
 const EventMain = () => {
     const itemsPerPage = 8; // Số sự kiện mỗi trang
     const [currentPage, setCurrentPage] = useState(1);
@@ -13,9 +13,9 @@ const EventMain = () => {
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await axios.get('/api/events'); // Gọi API
+                const response = await axios.get(`${config.API_URL}/api/events`); // Gọi API
                 setEvents(response.data); // Lưu dữ liệu sự kiện vào state
-                setLoading(false); // Cập nhật trạng thái loading
+                setLoading(false); // Cập nhật trạng thái loadings
             } catch (err) {
                 console.error('Error fetching events:', err);
                 setError('Failed to fetch events'); // Cập nhật lỗi nếu có

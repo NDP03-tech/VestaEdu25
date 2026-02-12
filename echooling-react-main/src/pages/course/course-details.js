@@ -6,7 +6,7 @@ import Breadcrumb from '../../components/Breadcrumb/CourseBreadcrumbs';
 import CourseDetailsMain from './CourseDetailsMain';
 import ScrollToTop from '../../components/ScrollTop';
 import Logo from '../../assets/images/logos/logo2.png';
-
+import config from '../../config';
 const CourseDetails = () => {
     const { id } = useParams(); 
     const courseID = id ? id.trim() : ''; // ✅ Xử lý ID tránh lỗi khoảng trắng hoặc xuống dòng
@@ -26,7 +26,7 @@ const CourseDetails = () => {
 
         const fetchCourseDetails = async () => {
             try {
-                const response = await fetch(`/api/course/${courseID}`);
+                const response = await fetch(`${config.API_URL}/api/course/${courseID}`);
                 if (!response.ok) {
                     const errorData = await response.json(); // ✅ Lấy thông tin lỗi từ backend
                     throw new Error(errorData.message || 'Không thể tải dữ liệu khóa học');

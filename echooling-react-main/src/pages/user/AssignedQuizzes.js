@@ -22,7 +22,8 @@ import {
   CheckCircleOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
-
+import config from "../../config";
+const API_BASE_URL = config.API_URL;
 const { Title, Text } = Typography;
 
 const AssignedQuizzes = () => {
@@ -52,7 +53,7 @@ const AssignedQuizzes = () => {
       const userId = user.id;
 
       try {
-        const res = await fetch(`/api/assigned-quizzes`, {
+        const res = await fetch(`${API_BASE_URL}/api/assigned-quizzes`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -72,7 +73,7 @@ const AssignedQuizzes = () => {
         const quizzesWithAttempts = await Promise.all(
           quizzesData.map(async (quiz) => {
             try {
-              const bestUrl = `/api/results/best-attempts/${quiz.id}`;
+              const bestUrl = `${API_BASE_URL}/api/results/best-attempts/${quiz.id}`;
 
               const bestRes = await fetch(bestUrl, {
                 headers: { Authorization: `Bearer ${token}` },
@@ -95,7 +96,7 @@ const AssignedQuizzes = () => {
 
               // Optional: Fetch all attempts để có số chính xác
               try {
-                const allAttemptsUrl = `/api/results/quiz/${quiz.id}/attempts`;
+                const allAttemptsUrl = `${API_BASE_URL}/api/results/quiz/${quiz.id}/attempts`;
                 const attemptsRes = await fetch(allAttemptsUrl, {
                   headers: { Authorization: `Bearer ${token}` },
                 });

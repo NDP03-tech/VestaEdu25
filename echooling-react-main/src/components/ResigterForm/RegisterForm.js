@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-
+import config from '../../config';
+const API_BASE_URL = config.API_URL;
 const RegisterForm = ({ courseTitle, courseId, onClose, open }) => {
   const [formData, setFormData] = useState({
     name: '',
@@ -18,12 +19,12 @@ const RegisterForm = ({ courseTitle, courseId, onClose, open }) => {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/course-registrations', {
+      const res = await fetch(`${API_BASE_URL}/api/course-registrations`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
-          courseId,
+          courseId,     
           courseTitle
         })
       });

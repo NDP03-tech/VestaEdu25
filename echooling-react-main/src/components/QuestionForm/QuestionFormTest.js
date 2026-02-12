@@ -8,7 +8,7 @@ import CheckboxesEditor from "../Editor/CheckboxEditor";
 import MultipleChoiceEditor from "../Editor/MultipleChoiceEditor";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./QuestionForm.css";
-
+import config from "../../config";
 const QuestionFormTest = ({
   questionIndex = 0,
   questionData = {},
@@ -38,7 +38,7 @@ const QuestionFormTest = ({
         (!questionData.questionText || !questionData.questionType)
       ) {
         try {
-          const res = await Axios.get(`/api/questions/${questionData.id}`);
+          const res = await Axios.get(`${config.API_URL}/api/questions/${questionData.id}`);
           setFromData(res.data);
         } catch (err) {
           console.error("❌ Error fetching question:", err);
@@ -140,7 +140,7 @@ const QuestionFormTest = ({
     };
 
     try {
-      const response = await Axios.post("/api/questions", newQuestion);
+      const response = await Axios.post(`${config.API_URL}/api/questions`, newQuestion);
       alert("✅ Question created successfully");
       setQuestionId(response.data.id);
     } catch (error) {
@@ -167,7 +167,7 @@ const QuestionFormTest = ({
     console.log("📤 Updating question with:", updatedData);
 
     try {
-      await Axios.put(`/api/questions/${questionId}`, updatedData);
+      await Axios.put(`${config.API_URL}/api/questions/${questionId}`, updatedData);
       alert("✅ Question updated successfully");
       onFinishEdit?.({ ...updatedData, id: questionId });
     } catch (error) {

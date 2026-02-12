@@ -12,7 +12,7 @@ import { CSVLink } from 'react-csv';
 import jsPDF from 'jspdf';
 import roboto from '../../fonts/Roboto-Regular-normal.js';
 import 'jspdf-autotable';
-
+import config from '../../config.js';
 const { Title } = Typography;
 
 const isRecent = (dateStr) => {
@@ -34,7 +34,7 @@ const RegistrationTableTabs = () => {
     try {
       setLoading(true);
       const token = localStorage.getItem('token');
-      const res = await fetch(`/api/${type}-registrations`, {
+      const res = await fetch(`${config.API_URL}/api/${type}-registrations`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 

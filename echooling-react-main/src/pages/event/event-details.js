@@ -7,7 +7,7 @@ import Breadcrumb from '../../components/Breadcrumb/EventBreadcrumbs';
 import EventDetailsMain from './EventDetailsMain';
 import ScrollToTop from '../../components/ScrollTop';
 import Logo from '../../assets/images/logos/logo2.png';
-
+import config from '../../config';
 const EventDetails = () => {
     const location = useLocation();
     const eventID = location.pathname.split('/')[2];
@@ -18,7 +18,7 @@ const EventDetails = () => {
     useEffect(() => {
         const fetchEvent = async () => {
             try {
-                const response = await axios.get(`/api/events/${eventID}`);
+                const response = await axios.get(`${config.API_URL}/api/events/${eventID}`);
                 setEvent(response.data);
             } catch (err) {
                 console.error('Error fetching event:', err);

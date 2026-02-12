@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import MicRecorder from "mic-recorder-to-mp3";
+import config from "../../config";
 import {
   Button,
   Upload,
@@ -78,7 +79,7 @@ const SpeakingRenderer = ({
       const formData = new FormData();
       formData.append("file", file);
 
-      const res = await fetch("/api/upload-media", {
+      const res = await fetch(`${config.API_URL}/api/upload-media`, {
         method: "POST",
         body: formData,
       });

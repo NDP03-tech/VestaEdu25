@@ -28,7 +28,7 @@ import {
   AppstoreOutlined,
 } from "@ant-design/icons";
 import { getId } from "../utils/idHelper";
-
+import config from "../config";
 const { Option } = Select;
 const { Title, Text } = Typography;
 const { Search } = Input;
@@ -48,7 +48,7 @@ const QuizManage = () => {
   const fetchQuizzes = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("/api/quizzes");
+      const res = await axios.get(`${config.API_URL}/api/quizzes`);
       setQuizzes(res.data);
     } catch (err) {
       console.error("❌ Error fetching quizzes", err);
@@ -60,7 +60,7 @@ const QuizManage = () => {
 
   const fetchCategories = async () => {
     try {
-      const res = await axios.get("/api/categories");
+      const res = await axios.get(`${config.API_URL}/api/categories`);
       setCategories(res.data.map((c) => c.name));
     } catch (err) {
       console.error("❌ Error fetching categories", err);
@@ -74,7 +74,7 @@ const QuizManage = () => {
     try {
       const token = localStorage.getItem("token");
 
-      const res = await fetch("/api/quizzes", {
+      const res = await fetch(`${config.API_URL}/api/quizzes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -119,7 +119,7 @@ const QuizManage = () => {
       okButtonProps: { danger: true },
       onOk: async () => {
         try {
-          await axios.delete(`/api/quizzes/${id}`);
+          await axios.delete(`${config.API_URL}/api/quizzes/${id}`);
           message.success("Đã xoá quiz thành công");
           fetchQuizzes();
         } catch (err) {
@@ -141,7 +141,7 @@ const QuizManage = () => {
       onOk: async () => {
         try {
           await Promise.all(
-            selectedQuizzes.map((id) => axios.delete(`/api/quizzes/${id}`))
+            selectedQuizzes.map((id) => axios.delete(`${config.API_URL}/api/quizzes/${id}`))
           );
           message.success("Đã xoá các quiz được chọn");
           fetchQuizzes();

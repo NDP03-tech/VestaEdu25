@@ -40,7 +40,7 @@ import {
 import { getId } from "../../utils/idHelper";
 import dayjs from "dayjs";
 import "./AdminCourse.css";
-
+import config from '../../config';
 const { Title, Text, Paragraph } = Typography;
 
 const AdminCourse = () => {
@@ -91,7 +91,7 @@ const AdminCourse = () => {
     setLoading(true);
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("/api/course", {
+      const response = await fetch(`${config.API_URL}/api/course`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -114,7 +114,7 @@ const AdminCourse = () => {
     formData.append("file", file);
 
     try {
-      const response = await fetch("/api/upload-media", {
+      const response = await fetch(`${config.API_URL}/api/upload-media`, {
         method: "POST",
         body: formData,
       });
@@ -169,7 +169,7 @@ const AdminCourse = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch(`/api/course/${id}`, {
+      const response = await fetch(`${config.API_URL}/api/course/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -208,7 +208,7 @@ const AdminCourse = () => {
         createdAt: isEdit ? courseToEdit.createdAt : new Date().toISOString(),
       };
 
-      const url = isEdit ? `/api/course/${editingId}` : "/api/course/create";
+      const url = isEdit ? `${config.API_URL}/api/course/${editingId}` : `${config.API_URL}/api/course/create`;
 
       const method = isEdit ? "PUT" : "POST";
       const token = localStorage.getItem("token");

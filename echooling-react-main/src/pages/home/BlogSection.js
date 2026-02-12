@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import SectionTitle from '../../components/SectionTitle';
 import SinglePost from '../../components/Blog/SinglePost';
 import axios from 'axios'; // nhớ cài nếu chưa: npm install axios
-
+import config from '../../config';
 const Blog = () => {
     const [posts, setPosts] = useState([]); // Luôn khởi tạo là mảng
     const [loading, setLoading] = useState(true);
@@ -10,7 +10,7 @@ const Blog = () => {
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const res = await axios.get('/api/blog/'); // Đảm bảo đúng endpoint
+                const res = await axios.get(`${config.API_URL}/api/blog/`); // Đảm bảo đúng endpoint
                 // Nếu res.data không phải mảng -> gán [] để tránh lỗi
                 if (Array.isArray(res.data)) {
                     setPosts(res.data);

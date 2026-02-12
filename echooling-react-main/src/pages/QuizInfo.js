@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Tabs, Tab, TabList, TabPanel } from 'react-tabs';
 import ExplanationEditor from '../Explanation/ExplanationEditor';
-
+import config from '../config';
 const defaultSettings = {
     oneQuestionPerPage: false,
     showQuestionNumbers: true,
@@ -31,7 +31,7 @@ const QuizInfo = ({ onQuizInfoChange, quizId }) => {
 
     useEffect(() => {
         if (quizId) {
-            axios.get(`/api/quizzes/${quizId}`)
+            axios.get(`${config.API_URL}/api/quizzes/${quizId}`)
                 .then(response => {
                     const quiz = response.data;
                     setTitle(quiz.title || '');
@@ -49,7 +49,7 @@ const QuizInfo = ({ onQuizInfoChange, quizId }) => {
     }, [title, category, uiSettings]);
 
     useEffect(() => {
-        axios.get("/api/categories")
+        axios.get(`${config.API_URL}/api/categories`)
             .then(res => setCategories(res.data.map(c => c.name)))
             .catch(err => console.error("Lỗi khi lấy danh mục:", err));
     }, []);
@@ -356,7 +356,7 @@ const QuizInfo = ({ onQuizInfoChange, quizId }) => {
         <button
           onClick={async () => {
             try {
-              const res = await axios.post('/api/categories', {
+              const res = await axios.post(`${config.API_URL}/api/categories`, {
                 name: newCategory,
               });
               const newCat = res.data.name;

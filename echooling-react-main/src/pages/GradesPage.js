@@ -23,7 +23,7 @@ import {
 } from "@ant-design/icons";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
-
+import config from "../config";
 const { Title, Text } = Typography;
 
 const GradesPage = () => {
@@ -37,7 +37,7 @@ const GradesPage = () => {
     const fetchSummary = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(`/api/results/best-attempts/${userId}`, {
+        const res = await axios.get(`${config.API_URL}/api/results/best-attempts/${userId}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 

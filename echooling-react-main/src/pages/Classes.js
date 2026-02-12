@@ -24,7 +24,7 @@ import {
 } from "@ant-design/icons";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+import config from "../config";
 const { Title, Text } = Typography;
 const { Search } = Input;
 
@@ -38,7 +38,7 @@ const Classes = () => {
   const fetchClasses = async () => {
     try {
       setLoading(true);
-      const res = await axios.get("/api/classes");
+      const res = await axios.get(`${config.API_URL}/api/classes`);
       setClassList(res.data);
     } catch (err) {
       message.error("Failed to fetch classes");
@@ -57,7 +57,7 @@ const Classes = () => {
     }
 
     try {
-      await axios.post("/api/classes", { name: className });
+      await axios.post(`${config.API_URL}/api/classes`, { name: className });
       setClassName("");
       fetchClasses();
       message.success("Class added successfully");
@@ -68,7 +68,7 @@ const Classes = () => {
 
   const handleDeleteClass = async (id) => {
     try {
-      await axios.delete(`/api/classes/${id}`);
+      await axios.delete(`${config.API_URL}/api/classes/${id}`);
       fetchClasses();
       message.success("Class deleted successfully");
     } catch (err) {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Input, Form, message } from 'antd';
 import axios from 'axios';
+import config from '../../config';
 
 const EventRegisterModal = ({ open, onClose, event }) => {
   const [loading, setLoading] = useState(false);
@@ -9,7 +10,7 @@ const EventRegisterModal = ({ open, onClose, event }) => {
   const handleSubmit = async (values) => {
     setLoading(true);
     try {
-      await axios.post('/api/event-registrations', {
+      await axios.post(`${config.API_URL}/api/event-registrations`, { 
         ...values,
   eventId: event.id,
         eventTitle: event.eventTitle || event.title,

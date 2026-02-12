@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import QuizInfo from "./QuizInfo/QuizInfo";
 import QuestionFormTest from "./QuestionForm/QuestionFormTest";
+import config from "../config";
 import "./QuizBuilder.css";
 
 const QuizBuilder = () => {
@@ -17,13 +18,13 @@ const QuizBuilder = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const quizRes = await fetch(`/api/quizzes/${quizId}`);
+        const quizRes = await fetch(`${config.API_URL}/api/quizzes/${quizId}`);
         if (!quizRes.ok) throw new Error("Quiz not found.");
         const quizData = await quizRes.json();
         console.log("✅ Quiz Info:", quizData);
         setQuizInfo(quizData);
 
-        const questionRes = await fetch(`/api/questions/by-quiz/${quizId}`);
+        const questionRes = await fetch(`${config.API_URL}/api/questions/by-quiz/${quizId}`);
         if (!questionRes.ok) throw new Error("Failed to fetch questions.");
         const questionsData = await questionRes.json();
         console.log("✅ Questions Fetched:", questionsData);
@@ -43,7 +44,7 @@ const QuizBuilder = () => {
   const handleSaveQuizInfo = async () => {
     setSaving(true);
     try {
-      const quizRes = await fetch(`/api/quizzes/${quizId}`, {
+      const quizRes = await fetch(`${config.API_URL}/api/quizzes/${quizId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(quizInfo),
@@ -81,7 +82,7 @@ const QuizBuilder = () => {
           };
 
           if (q.id) {
-            const res = await fetch(`/api/questions/${q.id}`, {
+            const res = await fetch(`${config.API_URL}/api/questions/${q.id}`, {
               method: "PUT",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(questionData),
@@ -89,7 +90,7 @@ const QuizBuilder = () => {
             if (!res.ok) throw new Error("Failed to update question.");
             return await res.json();
           } else {
-            const res = await fetch(`/api/questions`, {
+            const res = await fetch(`${config.API_URL}/api/questions`, {
               method: "POST",
               headers: { "Content-Type": "application/json" },
               body: JSON.stringify(questionData),
@@ -128,7 +129,7 @@ const QuizBuilder = () => {
 
     try {
       if (questionId) {
-        const res = await fetch(`/api/questions/${questionId}`, {
+        const res = await fetch(`${config.API_URL}/api/questions/${questionId}`, {
           method: "DELETE",
         });
 

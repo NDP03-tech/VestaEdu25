@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import SingleCourseThree from "../../components/Course/SingleCourseThree";
 import "./CourseGridMain.css"; // Import file CSS để tùy chỉnh giao diện pagination
-
+import config from '../../config';
 const CourseGridMain = () => {
     const [courses, setCourses] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -19,7 +19,7 @@ const CourseGridMain = () => {
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-                const response = await fetch("/api/course");
+                const response = await fetch(`${config.API_URL}/api/course`);
                 if (!response.ok) {
                     throw new Error("Lỗi khi lấy danh sách khóa học");
                 }
