@@ -1,19 +1,496 @@
-.page-container {
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+/* ============================================================
+   InstructorDetailsMain.css — Editorial Luxury
+   Cormorant Garamond (display) + DM Sans (body)
+   Navy deep + Warm gold + Ivory
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap");
+
+:root {
+  --navy: #0d1b2a;
+  --navy-mid: #16213e;
+  --navy-soft: #1e3a5f;
+  --gold: #d4a843;
+  --gold-light: #f0c96a;
+  --gold-pale: #fdf3dc;
+  --ivory: #fafaf8;
+  --white: #ffffff;
+  --gray-100: #f4f4f2;
+  --gray-200: #e8e6e0;
+  --gray-400: #a0a0a0;
+  --gray-600: #5a5a5a;
+  --radius-xl: 24px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow-card: 0 8px 40px rgba(13, 27, 42, 0.1);
+  --shadow-soft: 0 2px 16px rgba(13, 27, 42, 0.06);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.page-container.scrolling {
-    transform: translateY(-5px); /* Dịch chuyển nhẹ lên trên */
-    opacity: 0.9; /* Giảm độ sáng */
+/* ── Page ── */
+.idm-page {
+  background: var(--ivory);
+  min-height: 100vh;
+  font-family: "DM Sans", sans-serif;
+  padding: 80px 0 80px;
 }
 
-.bio-animation {
+.idm-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Hero card ── */
+.idm-hero-card {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--gray-200);
+  margin-bottom: 32px;
+  animation: fadeUp 0.65s ease both;
+}
+
+.idm-hero-inner {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 0;
+}
+
+/* ── Left: Avatar column ── */
+.idm-avatar-col {
+  background: linear-gradient(160deg, var(--navy) 0%, var(--navy-soft) 100%);
+  padding: 48px 36px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative ring */
+.idm-avatar-col::before {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(212, 168, 67, 0.18);
+  pointer-events: none;
+}
+
+.idm-avatar-col::after {
+  content: "";
+  position: absolute;
+  bottom: -40px;
+  left: -40px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(212, 168, 67, 0.1) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.idm-avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  position: relative;
+  z-index: 1;
+}
+
+.idm-avatar-name {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--white);
+  text-align: center;
+  line-height: 1.25;
+  position: relative;
+  z-index: 1;
+}
+
+.idm-avatar-designation {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  text-align: center;
+  font-weight: 500;
+  position: relative;
+  z-index: 1;
+}
+
+/* Social icons */
+.idm-social-row {
+  display: flex;
+  gap: 10px;
+  position: relative;
+  z-index: 1;
+}
+
+.idm-social-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 16px;
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.idm-social-btn:hover {
+  background: rgba(212, 168, 67, 0.2);
+  border-color: rgba(212, 168, 67, 0.4);
+  color: var(--gold-light);
+  transform: translateY(-2px);
+}
+
+/* Contact items */
+.idm-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.idm-contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.65);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.idm-contact-list li:last-child {
+  border-bottom: none;
+}
+
+.idm-contact-list li .anticon {
+  color: var(--gold-light);
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* ── Right: Info column ── */
+.idm-info-col {
+  padding: 48px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* Section label */
+.idm-section-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.idm-section-label-line {
+  width: 32px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.idm-section-label-text {
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+/* Bio */
+.idm-bio-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 14px;
+  letter-spacing: -0.3px;
+}
+
+.idm-bio-content {
+  font-size: 0.97rem;
+  line-height: 1.85;
+  color: var(--gray-600);
+}
+
+.idm-bio-content em,
+.idm-bio-content i {
+  font-style: italic;
+  color: inherit !important;
+}
+
+.idm-bio-content p {
+  margin-bottom: 1em;
+}
+
+.idm-bio-content h2,
+.idm-bio-content h3 {
+  font-family: "Cormorant Garamond", serif;
+  color: var(--navy);
+  margin: 1.2em 0 0.5em;
+}
+
+/* Divider */
+.idm-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--gold),
+    var(--gray-200) 60%,
+    transparent
+  );
+}
+
+/* ── Counters ── */
+.idm-counters {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.idm-counter-item {
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  padding: 20px 16px;
+  text-align: center;
+  transition: var(--transition);
+}
+
+.idm-counter-item:hover {
+  background: var(--gold-pale);
+  border-color: rgba(212, 168, 67, 0.3);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-soft);
+}
+
+.idm-counter-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin: 0 auto 10px;
+  display: block;
+}
+
+.idm-counter-number {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+.idm-counter-label {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+
+/* ── Courses section ── */
+.idm-courses {
+  margin-top: 40px;
+  animation: fadeUp 0.65s 0.15s ease both;
+}
+
+.idm-courses-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.idm-courses-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), var(--gray-200));
+}
+
+.idm-courses-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--navy);
+  white-space: nowrap;
+  letter-spacing: -0.3px;
+}
+
+.idm-courses-line-right {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gray-200), transparent);
+}
+
+/* Courses grid */
+.idm-courses-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+/* Course card */
+.idm-course-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.idm-course-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card);
+  border-color: rgba(212, 168, 67, 0.25);
+}
+
+.idm-course-img-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+}
+
+.idm-course-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.idm-course-card:hover .idm-course-img {
+  transform: scale(1.06);
+}
+
+.idm-course-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(13, 27, 42, 0.78);
+  color: var(--gold-light);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  text-transform: uppercase;
+}
+
+.idm-course-body {
+  padding: 18px 20px 20px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.idm-course-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.35;
+  text-decoration: none;
+  flex: 1;
+}
+
+.idm-course-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--gray-100);
+}
+
+.idm-course-author-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--gray-200);
+}
+
+.idm-course-author-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-400);
+}
+
+/* ── Animation ── */
+@keyframes fadeUp {
+  from {
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-}
-
-.bio-animation.visible {
+    transform: translateY(28px);
+  }
+  to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .idm-hero-inner {
+    grid-template-columns: 260px 1fr;
+  }
+}
+
+@media (max-width: 860px) {
+  .idm-hero-inner {
+    grid-template-columns: 1fr;
+  }
+  .idm-avatar-col {
+    padding: 40px 28px;
+  }
+  .idm-info-col {
+    padding: 36px 28px;
+  }
+  .idm-courses-grid {
+    grid-template-columns: 1fr;
+  }
+  .idm-counters {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .idm-counters {
+    grid-template-columns: 1fr;
+  }
+  .idm-info-col {
+    padding: 28px 20px;
+  }
 }

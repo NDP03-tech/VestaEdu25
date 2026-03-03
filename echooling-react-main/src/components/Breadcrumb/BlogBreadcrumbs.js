@@ -1,72 +1,144 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+
+const formatDateVN = (dateString) => {
+  if (!dateString) return "";
+
+  const date = new Date(dateString);
+
+  return new Intl.DateTimeFormat("vi-VN", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+  }).format(date);
+};
 
 const Breadcrumb = (props) => {
-    const { 
-        postTitle, 
-        postBannerImg, 
-        postCategory, 
-        postAuthor, 
-        postAuthorImg, 
-        postPublishedDate, 
-        postTotalView 
-    } = props;
+  const {
+    postTitle,
+    postBannerImg,
+    postCategory,
+    postAuthor,
+    postPublishedDate,
+  } = props;
 
-    // Đặt giá trị mặc định
-    const defaultBannerImg = 'https://via.placeholder.com/800x400'; // URL của ảnh mặc định
-    const defaultAuthorImg = 'https://via.placeholder.com/100'; // URL của ảnh tác giả mặc định
+  const defaultBannerImg = "https://via.placeholder.com/1600x600";
 
-    return (
-        <div className="react-breadcrumbs single-page-breadcrumbs">
-            <div className="breadcrumbs-wrap">
-                <img 
-                    className="desktop" 
-                    src={postBannerImg || defaultBannerImg} 
-                    alt="Breadcrumbs" 
-                />
-                <img 
-                    className="mobile" 
-                    src={postBannerImg || defaultBannerImg} 
-                    alt="Breadcrumbs" 
-                />
-                <div className="breadcrumbs-inner">
-                    <div className="container">
-                        <div className="breadcrumbs-text">
-                            <Link to="#" className="cate">{postCategory}</Link>
-                            <h1 className="breadcrumbs-title">{postTitle}</h1>
-                            <ul className="user-section">
-                                <li className="user">
-                                    <span>
-                                        <img 
-                                            src={postAuthorImg || defaultAuthorImg} 
-                                            alt="user" 
-                                            style={{ 
-                                                width: '70px',  // Chiều rộng cố định
-                                                height: '50%',   // Giữ tỉ lệ khung hình
-                                                borderRadius: '50%' // Nếu bạn muốn ảnh tròn
-                                            }} 
-                                        />
-                                    </span>
-                                    <span>{postAuthor}</span>
-                                </li>
-                                <li>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-clock">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <polyline points="12 6 12 12 16 14"></polyline>
-                                    </svg> 
-                                    {postPublishedDate}
-                                </li>
-                                <li>
-                                    
-                                
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>                
+  return (
+    <div className="react-breadcrumbs single-page-breadcrumbs">
+      <div className="breadcrumbs-wrap">
+        {/* Banner */}
+        <img
+          className="banner-img"
+          src={postBannerImg || defaultBannerImg}
+          alt="Breadcrumbs"
+        />
+
+        {/* Overlay nhẹ */}
+        <div className="banner-overlay"></div>
+
+        {/* Content */}
+        <div className="breadcrumbs-inner">
+          <div className="container">
+            <div className="breadcrumbs-text">
+              <Link to="#" className="cate">
+                {postCategory}
+              </Link>
+
+              <h1 className="breadcrumbs-title">{postTitle}</h1>
+
+              <ul className="user-section">
+                <li>{postAuthor}</li>
+                <li>{formatDateVN(postPublishedDate)}</li>
+              </ul>
+            </div>
+          </div>
         </div>
-    );
-}
+      </div>
+
+      <style>
+        {`
+        .breadcrumbs-wrap {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .banner-img {
+          width: 100%;
+          height: 450px;
+          object-fit: cover;
+          display: block;
+        }
+
+        /* Overlay nhẹ */
+        .banner-overlay {
+          position: absolute;
+          inset: 0;
+          background: rgba(0, 0, 0, 0.35);
+        }
+
+        .breadcrumbs-inner {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+        }
+
+        .breadcrumbs-text {
+          color: #fff;
+          max-width: 800px;
+        }
+
+        /* TEXT SHADOW MẠNH – CÁCH 2 */
+        .breadcrumbs-title {
+          font-size: 42px;
+          font-weight: 700;
+          margin: 15px 0;
+          text-shadow:
+            0 4px 10px rgba(0,0,0,0.9),
+            0 8px 25px rgba(0,0,0,0.8);
+        }
+
+        .cate,
+        .user-section {
+          text-shadow:
+            0 2px 6px rgba(0,0,0,0.9),
+            0 4px 12px rgba(0,0,0,0.8);
+        }
+
+        .user-section {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          gap: 20px;
+          flex-wrap: wrap;
+        }
+
+        /* Responsive */
+        @media (max-width: 1199px) {
+          .banner-img {
+            height: 320px;
+          }
+          .breadcrumbs-title {
+            font-size: 30px;
+          }
+        }
+
+        @media (max-width: 768px) {
+          .banner-img {
+            height: 220px;
+          }
+          .breadcrumbs-title {
+            font-size: 22px;
+          }
+        }
+        `}
+      </style>
+    </div>
+  );
+};
 
 export default Breadcrumb;

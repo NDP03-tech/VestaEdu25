@@ -1,0 +1,109 @@
+/* ===== Wrapper ===== */
+.react-breadcrumbs {
+  position: relative;
+  overflow: hidden;
+}
+
+.breadcrumbs-wrap {
+  position: relative;
+}
+
+/* ===== Banner Image ===== */
+.banner-img {
+  width: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ===== Responsive Heights ===== */
+
+/* Full HD */
+@media (min-width: 1600px) {
+  .banner-img {
+    height: 500px;
+  }
+}
+
+/* Laptop */
+@media (min-width: 1200px) and (max-width: 1599px) {
+  .banner-img {
+    height: 420px;
+  }
+}
+
+/* iPad / Tablet */
+@media (min-width: 768px) and (max-width: 1199px) {
+  .banner-img {
+    height: 320px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .banner-img {
+    height: 220px;
+  }
+}
+
+/* ===== Overlay ===== */
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+/* ===== Content ===== */
+.breadcrumbs-inner {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+}
+
+/* ===== Text Styling ===== */
+.breadcrumbs-text {
+  color: #fff;
+}
+
+.breadcrumbs-title {
+  font-size: 42px;
+  font-weight: 700;
+  margin: 15px 0;
+}
+
+/* Responsive text */
+@media (max-width: 1199px) {
+  .breadcrumbs-title {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 767px) {
+  .breadcrumbs-title {
+    font-size: 24px;
+  }
+}
+
+.cate {
+  color: #ffd700;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.user-section {
+  list-style: none;
+  padding: 0;
+  margin: 15px 0 0;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.author-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}

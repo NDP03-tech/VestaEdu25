@@ -36,7 +36,7 @@ import {
 import { getId } from "../../utils/idHelper";
 import dayjs from "dayjs";
 import "./AdminBlog.css";
-import config from '../../config';
+import config from "../../config";
 const { Title, Text, Paragraph } = Typography;
 
 const AdminBlog = () => {
@@ -62,7 +62,7 @@ const AdminBlog = () => {
     const filtered = blogs.filter(
       (blog) =>
         blog.title?.toLowerCase().includes(searchText.toLowerCase()) ||
-        blog.author?.toLowerCase().includes(searchText.toLowerCase())
+        blog.author?.toLowerCase().includes(searchText.toLowerCase()),
     );
     setFilteredBlogs(filtered);
   }, [searchText, blogs]);
@@ -85,7 +85,7 @@ const AdminBlog = () => {
       if (!response.ok) throw new Error("Failed to fetch blogs");
 
       const data = await response.json();
-    
+
       setBlogs(data);
       setFilteredBlogs(data);
     } catch (error) {
@@ -140,7 +140,7 @@ const AdminBlog = () => {
       if (!response.ok) throw new Error("Failed to fetch blog");
 
       const blogData = await response.json();
-     
+
       setBlogToEdit(blogData);
       setShowModal(true);
       setEditingId(id);
@@ -193,7 +193,9 @@ const AdminBlog = () => {
 
       console.log("📤 Submitting blog:", updatedBlog);
 
-      const url = isEdit ? `${config.API_URL}/api/blog/${editingId}` : `${config.API_URL}/api/blog/create`;
+      const url = isEdit
+        ? `${config.API_URL}/api/blog/${editingId}`
+        : `${config.API_URL}/api/blog/create`;
 
       const method = isEdit ? "PUT" : "POST";
       const token = localStorage.getItem("token");
@@ -221,7 +223,7 @@ const AdminBlog = () => {
       setBlogToEdit(null);
 
       message.success(
-        isEdit ? "Blog updated successfully!" : "Blog created successfully!"
+        isEdit ? "Blog updated successfully!" : "Blog created successfully!",
       );
     } catch (error) {
       console.error("❌ Submit error:", error);
@@ -633,28 +635,70 @@ const AdminBlog = () => {
                         "undo redo | formatselect | bold italic underline | alignleft aligncenter alignright | bullist numlist | image media link | fullscreen preview | removeformat | help",
                       content_style:
                         'body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; line-height: 1.6; }',
-                      file_picker_types: "image",
+
+                      // ✅ Thêm cả video vào file_picker_types
+                      file_picker_types: "image media",
+
                       file_picker_callback: (callback, value, meta) => {
-                        if (meta.filetype === "image") {
+                        // ✅ Xử lý cả image và media (video)
+                        if (
+                          meta.filetype === "image" ||
+                          meta.filetype === "media"
+                        ) {
                           const input = document.createElement("input");
                           input.setAttribute("type", "file");
-                          input.setAttribute("accept", "image/*");
+
+                          // ✅ Accept tương ứng theo loại file
+                          if (meta.filetype === "media") {
+                            input.setAttribute("accept", "video/*");
+                          } else {
+                            input.setAttribute("accept", "image/*");
+                          }
+
                           input.onchange = async function () {
                             const file = this.files[0];
+
+                            // ✅ Kiểm tra dung lượng video (giới hạn 50MB)
+                            if (
+                              meta.filetype === "media" &&
+                              file.size > 50 * 1024 * 1024
+                            ) {
+                              message.error("Video quá lớn! Tối đa 50MB");
+                              return;
+                            }
+
+                            message.loading({
+                              content: "Đang upload...",
+                              key: "media-upload",
+                            });
                             const url = await uploadToLocalServer(file);
+
                             if (url) {
-                              callback(url, { alt: file.name });
+                              message.success({
+                                content: "Upload thành công!",
+                                key: "media-upload",
+                              });
+                              callback(url, {
+                                title: file.name,
+                                // ✅ Với video cần thêm source
+                                source2: url,
+                                poster: "",
+                              });
                             } else {
-                              message.error("Image upload failed");
+                              message.error({
+                                content: "Upload thất bại",
+                                key: "media-upload",
+                              });
                             }
                           };
                           input.click();
                         }
                       },
+
                       images_upload_handler: async (
                         blobInfo,
                         success,
-                        failure
+                        failure,
                       ) => {
                         const file = blobInfo.blob();
                         const url = await uploadToLocalServer(file);
@@ -664,6 +708,11 @@ const AdminBlog = () => {
                           failure("Image upload failed");
                         }
                       },
+
+                      // ✅ Thêm dòng này để tránh TinyMCE tự convert blob URL
+                      convert_urls: false,
+                      relative_urls: false,
+                      remove_script_host: false,
                     }}
                   />
                 </Form.Item>

@@ -1,0 +1,21 @@
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+}
+
+.breadcrumbs-title {
+  color: #fff;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+}
+
+.user-section,
+.cate {
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}

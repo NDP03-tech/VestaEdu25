@@ -1,125 +1,223 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import config from '../../config';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import config from "../../config";
+import "./BlogDetailsMain.css"; // ← Giữ nguyên tên file CSS của bạn
+
 const BlogMain = ({ postTitle, postImg, postContent, currentPostId }) => {
-    const [relatedPosts, setRelatedPosts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const [relatedPosts, setRelatedPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchRelatedPosts = async () => {
-            try {
-                const response = await fetch(`${config.API_URL}/api/blog`);
-                if (!response.ok) {
-                    throw new Error('Không thể tải dữ liệu bài viết');
-                }
-                const data = await response.json();
-                const filtered = data.filter(post => post.id !== currentPostId); // Loại trừ bài hiện tại
-                setRelatedPosts(filtered.slice(0, 3)); // Hiển thị 3 bài liên quan
-            } catch (error) {
-                console.error("Lỗi API:", error.message);
-                setError(error.message);
-            } finally {
-                setLoading(false);
-            }
-        };
+  useEffect(() => {
+    const fetchRelatedPosts = async () => {
+      try {
+        const response = await fetch(`${config.API_URL}/api/blog`);
+        if (!response.ok) throw new Error("Không thể tải dữ liệu bài viết");
+        const data = await response.json();
+        const filtered = data.filter((post) => post.id !== currentPostId);
+        setRelatedPosts(filtered.slice(0, 3));
+      } catch (error) {
+        console.error("Lỗi API:", error.message);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchRelatedPosts();
+  }, [currentPostId]);
 
-        fetchRelatedPosts();
-    }, [currentPostId]);
-
-    if (loading) return <div>⏳ Đang tải...</div>;
-    if (error) return <div style={{ color: 'red' }}>❌ Lỗi: {error}</div>;
-
+  if (loading)
     return (
-        <div className="back__course__page_grid react-courses__single-page pb---40 pt---110">
-            <div className="container">
-                <div className="row">
-                    <div>
-                        <div className="blog-single-inner">
-                            <div className="blog-content">
-                                <div className="blog-image" style={{ maxWidth: '800px', margin: '20px auto', overflow: 'hidden' }}>
-                                    <img 
-                                        src={postImg} 
-                                        alt={postTitle} 
-                                        style={{ width: '100%', height: 'auto', objectFit: 'cover' }} 
-                                    />
-                                </div>
-
-                                <p dangerouslySetInnerHTML={{ __html: postContent.replace(/\n/g, '<br />') }}></p>
-
-                                <a href="https://goo.gl/xahbn4" target="_blank" rel="noopener noreferrer">
-                                    Link đăng ký nhập học : https://goo.gl/xahbn4
-                                </a>
-
-                                <div className="blog-tags">
-                                    <div className="row align-items-center">
-                                        <div className="col-md-2">
-                                            <div className="share-course">
-                                                Share this post:
-                                                <em>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
-                                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" 
-                                                        strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" 
-                                                        className="feather feather-share-2">
-                                                        <circle cx="18" cy="5" r="3"></circle>
-                                                        <circle cx="6" cy="12" r="3"></circle>
-                                                        <circle cx="18" cy="19" r="3"></circle>
-                                                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                                                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-                                                    </svg>
-                                                </em>
-                                                <span>
-                                                    <Link to="#"><i aria-hidden="true" className="social_facebook"></i></Link>
-                                                    <Link to="#"><i aria-hidden="true" className="social_linkedin"></i></Link>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="single-nav">
-                                    <div className="back-prev">
-                                        <Link to="#"><i className="back-icon arrow_carrot-left"></i> PREV POST <em>Graduate Admissions</em></Link>
-                                    </div>
-                                    <div className="back-next">
-                                        <Link to="#"> NEXT POST <i className="back-icon arrow_carrot-right"></i> <em> Less is More</em></Link>
-                                    </div>
-                                </div>
-
-                                <div className="react-course-filter related__course">
-                                    <h3>Related Posts</h3>
-                                    <div className="row">
-                                        {relatedPosts.map((data) => (
-                                            <div key={data.id} className="single-studies col-md-4 grid-item">
-                                                <div className="inner-course">
-                                                    <div className="case-img">
-                                                        <Link to="#" className="cate-w">
-                                                            {new Date(data.createdAt).toLocaleDateString('vi-VN')}
-                                                        </Link>
-                                                        <img src={data.image} alt={data.title} />
-                                                    </div>
-                                                    <div className="case-content">
-                                                        <em className="cate-camp">{data.category}</em>
-                                                        <h4 className="case-title">
-                                                            <Link to={`/blog/${data.id}`}>{data.title}</Link>
-                                                        </h4>
-                                                        <div className="react__user">
-                                                            <img src={data.authorImg} alt={data.author} /> {data.author}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          padding: "120px 0",
+          fontFamily: "DM Sans, sans-serif",
+          color: "#a0a0a0",
+        }}
+      >
+        Đang tải...
+      </div>
     );
+  if (error)
+    return (
+      <div style={{ textAlign: "center", padding: "80px", color: "#e74c3c" }}>
+        ❌ Lỗi: {error}
+      </div>
+    );
+
+  return (
+    <div className="bm-page">
+      <div className="bm-container">
+        {/* ── Main Article ── */}
+        <article className="bm-article">
+          {/* Hero image */}
+          <div className="bm-body">
+            {/* Rich content */}
+            <div
+              className="bm-content"
+              dangerouslySetInnerHTML={{
+                __html: postContent?.replace(/\n/g, "<br />"),
+              }}
+            />
+
+            {/* CTA link */}
+            <a
+              className="bm-cta-link"
+              href="https://goo.gl/xahbn4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+              </svg>
+              Đăng ký nhập học
+            </a>
+
+            <div className="bm-divider" />
+
+            {/* Share bar */}
+            <div className="bm-share-bar">
+              <span className="bm-share-icon">
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <circle cx="18" cy="5" r="3" />
+                  <circle cx="6" cy="12" r="3" />
+                  <circle cx="18" cy="19" r="3" />
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                </svg>
+              </span>
+              <span className="bm-share-label">Share</span>
+              <Link to="#" className="bm-share-btn">
+                f
+              </Link>
+              <Link to="#" className="bm-share-btn">
+                in
+              </Link>
+            </div>
+
+            <div className="bm-divider" />
+
+            {/* Prev / Next nav */}
+            <nav className="bm-nav">
+              <Link to="#" className="bm-nav-item prev">
+                <div className="bm-nav-arrow">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polyline points="15 18 9 12 15 6" />
+                  </svg>
+                </div>
+                <div className="bm-nav-meta">
+                  <span className="bm-nav-direction">Prev Post</span>
+                  <span className="bm-nav-post-title">Graduate Admissions</span>
+                </div>
+              </Link>
+              <Link to="#" className="bm-nav-item next">
+                <div className="bm-nav-arrow">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <polyline points="9 18 15 12 9 6" />
+                  </svg>
+                </div>
+                <div className="bm-nav-meta">
+                  <span className="bm-nav-direction">Next Post</span>
+                  <span className="bm-nav-post-title">Less is More</span>
+                </div>
+              </Link>
+            </nav>
+          </div>
+        </article>
+
+        {/* ── Related Posts ── */}
+        {relatedPosts.length > 0 && (
+          <section className="bm-related">
+            <div className="bm-related-header">
+              <span className="bm-related-line" />
+              <h3 className="bm-related-title">Related Posts</h3>
+              <span className="bm-related-line-right" />
+            </div>
+
+            <div className="bm-related-grid">
+              {relatedPosts.map((data) => (
+                <Link
+                  key={data.id}
+                  to={`/blog/${data.id}`}
+                  className="bm-related-card"
+                >
+                  <div className="bm-related-img-wrap">
+                    <img
+                      className="bm-related-img"
+                      src={data.image}
+                      alt={data.title}
+                    />
+                    <span className="bm-related-date">
+                      {new Date(data.createdAt).toLocaleDateString("vi-VN")}
+                    </span>
+                  </div>
+                  <div className="bm-related-body">
+                    {data.category && (
+                      <span className="bm-related-category">
+                        {data.category}
+                      </span>
+                    )}
+                    <h4 className="bm-related-post-title">{data.title}</h4>
+                    <div className="bm-related-author">
+                      {data.authorImg && (
+                        <img
+                          className="bm-related-author-img"
+                          src={data.authorImg}
+                          alt={data.author}
+                        />
+                      )}
+                      <span className="bm-related-author-name">
+                        {data.author}
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default BlogMain;

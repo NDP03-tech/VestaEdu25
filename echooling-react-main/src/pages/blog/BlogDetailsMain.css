@@ -1,0 +1,501 @@
+/* ============================================================
+   BlogMain.css — Editorial Luxury
+   Cormorant Garamond (display) + DM Sans (body)
+   Navy deep + Warm gold + Ivory
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap");
+
+:root {
+  --navy: #0d1b2a;
+  --navy-mid: #16213e;
+  --navy-soft: #1e3a5f;
+  --gold: #d4a843;
+  --gold-light: #f0c96a;
+  --gold-pale: #fdf3dc;
+  --ivory: #fafaf8;
+  --white: #ffffff;
+  --gray-100: #f4f4f2;
+  --gray-200: #e8e6e0;
+  --gray-400: #a0a0a0;
+  --gray-600: #5a5a5a;
+  --text: #1a1a1a;
+  --radius-xl: 24px;
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+  --shadow-card: 0 8px 40px rgba(13, 27, 42, 0.1);
+  --shadow-soft: 0 2px 16px rgba(13, 27, 42, 0.06);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Page wrapper ── */
+.bm-page {
+  background: var(--ivory);
+  min-height: 100vh;
+  font-family: "DM Sans", sans-serif;
+  padding: 80px 0 80px;
+}
+
+.bm-container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ── Article card ── */
+.bm-article {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--gray-200);
+  animation: fadeUp 0.65s ease both;
+}
+
+/* ── Hero image ── */
+.bm-hero-img {
+  width: 100%;
+  aspect-ratio: 16/7;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.bm-article:hover .bm-hero-img {
+  transform: scale(1.015);
+}
+
+.bm-hero-wrap {
+  overflow: hidden;
+  position: relative;
+}
+
+/* Gold accent line under image */
+.bm-hero-wrap::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--gold),
+    var(--gold-light),
+    transparent
+  );
+}
+
+/* ── Article body ── */
+.bm-body {
+  padding: 48px 56px 40px;
+}
+
+/* ── Rich content ── */
+.bm-content em,
+.bm-content i {
+  font-style: italic;
+  color: inherit !important;
+  background: none !important;
+}
+
+.bm-content p {
+  margin-bottom: 1.3em;
+}
+
+.bm-content h1,
+.bm-content h2,
+.bm-content h3 {
+  font-family: "Cormorant Garamond", serif;
+  color: var(--navy);
+  margin: 1.8em 0 0.7em;
+  line-height: 1.25;
+}
+
+.bm-content h2 {
+  font-size: 1.7rem;
+}
+.bm-content h3 {
+  font-size: 1.35rem;
+}
+
+.bm-content img {
+  max-width: 100%;
+  border-radius: var(--radius-lg);
+  margin: 20px 0;
+  box-shadow: var(--shadow-card);
+}
+
+.bm-content video {
+  max-width: 100%;
+  border-radius: var(--radius-lg);
+  margin: 20px 0;
+}
+
+.bm-content ul,
+.bm-content ol {
+  padding-left: 1.5em;
+  margin-bottom: 1.2em;
+}
+
+.bm-content li {
+  margin-bottom: 0.5em;
+}
+
+.bm-content blockquote {
+  border-left: 3px solid var(--gold);
+  margin: 1.5em 0;
+  padding: 12px 24px;
+  background: var(--gold-pale);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--navy);
+}
+
+/* ── CTA link ── */
+.bm-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%);
+  color: var(--white);
+  text-decoration: none;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-radius: 100px;
+  margin-bottom: 40px;
+  transition: var(--transition);
+  box-shadow: 0 6px 24px rgba(13, 27, 42, 0.2);
+}
+
+.bm-cta-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 36px rgba(13, 27, 42, 0.28);
+  color: var(--gold-light);
+}
+
+.bm-cta-link svg {
+  flex-shrink: 0;
+}
+
+/* ── Divider ── */
+.bm-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    var(--gold),
+    var(--gray-200) 60%,
+    transparent
+  );
+  margin: 36px 0;
+}
+
+/* ── Share bar ── */
+.bm-share-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.bm-share-label {
+  font-size: 11px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  font-weight: 600;
+}
+
+.bm-share-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-600);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 700;
+  transition: var(--transition);
+}
+
+.bm-share-btn:hover {
+  background: var(--gold-pale);
+  border-color: rgba(212, 168, 67, 0.4);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+.bm-share-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gray-400);
+  margin-right: 4px;
+}
+
+/* ── Prev / Next nav ── */
+.bm-nav {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 36px;
+}
+
+.bm-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--gray-100);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  transition: var(--transition);
+  color: inherit;
+}
+
+.bm-nav-item:hover {
+  background: var(--gold-pale);
+  border-color: rgba(212, 168, 67, 0.35);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+.bm-nav-item.prev {
+  flex-direction: row;
+}
+.bm-nav-item.next {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.bm-nav-arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--navy);
+  transition: var(--transition);
+}
+
+.bm-nav-item:hover .bm-nav-arrow {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--white);
+}
+
+.bm-nav-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bm-nav-direction {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  font-weight: 600;
+}
+
+.bm-nav-post-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.3;
+}
+
+/* ── Related posts section ── */
+.bm-related {
+  margin-top: 72px;
+  animation: fadeUp 0.65s 0.15s ease both;
+}
+
+.bm-related-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.bm-related-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold), var(--gray-200));
+}
+
+.bm-related-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--navy);
+  white-space: nowrap;
+  letter-spacing: -0.3px;
+}
+
+.bm-related-line-right {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gray-200), transparent);
+}
+
+/* Related grid */
+.bm-related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Related card */
+.bm-related-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--gray-200);
+  box-shadow: var(--shadow-soft);
+  transition: var(--transition);
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.bm-related-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-card);
+  border-color: rgba(212, 168, 67, 0.25);
+}
+
+.bm-related-img-wrap {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+
+.bm-related-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.bm-related-card:hover .bm-related-img {
+  transform: scale(1.06);
+}
+
+.bm-related-date {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(13, 27, 42, 0.75);
+  color: var(--gold-light);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  padding: 5px 12px;
+  border-radius: 100px;
+  text-transform: uppercase;
+}
+
+.bm-related-body {
+  padding: 20px 20px 22px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bm-related-category {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.bm-related-post-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.35;
+  flex: 1;
+}
+
+.bm-related-author {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--gray-100);
+}
+
+.bm-related-author-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--gray-200);
+}
+
+.bm-related-author-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--gray-600);
+}
+
+/* ── Animations ── */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .bm-related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .bm-body {
+    padding: 36px 32px 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .bm-related-grid {
+    grid-template-columns: 1fr;
+  }
+  .bm-body {
+    padding: 28px 20px 24px;
+  }
+  .bm-nav {
+    grid-template-columns: 1fr;
+  }
+  .bm-nav-item.next {
+    flex-direction: row;
+    text-align: left;
+  }
+}

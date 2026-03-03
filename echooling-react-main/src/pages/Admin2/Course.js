@@ -40,7 +40,7 @@ import {
 import { getId } from "../../utils/idHelper";
 import dayjs from "dayjs";
 import "./AdminCourse.css";
-import config from '../../config';
+import config from "../../config";
 const { Title, Text, Paragraph } = Typography;
 
 const AdminCourse = () => {
@@ -67,7 +67,7 @@ const AdminCourse = () => {
       (course) =>
         course.title?.toLowerCase().includes(searchText.toLowerCase()) ||
         course.name?.toLowerCase().includes(searchText.toLowerCase()) ||
-        course.author?.toLowerCase().includes(searchText.toLowerCase())
+        course.author?.toLowerCase().includes(searchText.toLowerCase()),
     );
     setFilteredCourses(filtered);
   }, [searchText, courses]);
@@ -82,7 +82,7 @@ const AdminCourse = () => {
       };
       form.setFieldsValue(formValues);
       setEditorContent(
-        courseToEdit.content ? String(courseToEdit.content) : ""
+        courseToEdit.content ? String(courseToEdit.content) : "",
       );
     }
   }, [courseToEdit, showModal, form]);
@@ -208,7 +208,9 @@ const AdminCourse = () => {
         createdAt: isEdit ? courseToEdit.createdAt : new Date().toISOString(),
       };
 
-      const url = isEdit ? `${config.API_URL}/api/course/${editingId}` : `${config.API_URL}/api/course/create`;
+      const url = isEdit
+        ? `${config.API_URL}/api/course/${editingId}`
+        : `${config.API_URL}/api/course/create`;
 
       const method = isEdit ? "PUT" : "POST";
       const token = localStorage.getItem("token");
@@ -236,7 +238,9 @@ const AdminCourse = () => {
       setCourseToEdit(null);
 
       message.success(
-        isEdit ? "Course updated successfully!" : "Course created successfully!"
+        isEdit
+          ? "Course updated successfully!"
+          : "Course created successfully!",
       );
     } catch (error) {
       console.error("❌ Submit error:", error);
@@ -467,7 +471,7 @@ const AdminCourse = () => {
               title="Total Lessons"
               value={courses.reduce(
                 (sum, c) => sum + (parseInt(c.lesson) || 0),
-                0
+                0,
               )}
               prefix={<FileTextOutlined />}
               valueStyle={{ color: "#faad14", fontSize: 28 }}
@@ -546,8 +550,8 @@ const AdminCourse = () => {
                       field === "image"
                         ? "Course Image"
                         : field === "bannerImg"
-                        ? "Banner Image"
-                        : "Author Image"
+                          ? "Banner Image"
+                          : "Author Image"
                     }
                     name={field}
                   >
@@ -564,8 +568,8 @@ const AdminCourse = () => {
                           {field === "image"
                             ? "Course Image"
                             : field === "bannerImg"
-                            ? "Banner"
-                            : "Author Photo"}
+                              ? "Banner"
+                              : "Author Photo"}
                         </Button>
                       </Upload>
                       {form.getFieldValue(field) && (
@@ -781,7 +785,7 @@ const AdminCourse = () => {
                       images_upload_handler: async (
                         blobInfo,
                         success,
-                        failure
+                        failure,
                       ) => {
                         const file = blobInfo.blob();
                         const url = await uploadToLocalServer(file);

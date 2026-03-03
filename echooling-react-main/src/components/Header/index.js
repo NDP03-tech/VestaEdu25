@@ -101,7 +101,7 @@ const Header = (props) => {
                         src={isVisible ? stickyLogo : normalLogo}
                         alt="Logo"
                         style={{
-                          width: "600px", // Tăng kích thước logo
+                          width: "250px", // Tăng kích thước logo
                           height: "200px", // Giữ tỷ lệ khung hình
                           objectFit: "contain", // Đảm bảo không bị cắt và không bị biến dạng
                           display: "flex", // Đảm bảo hình ảnh không có khoảng trống bên dưới
@@ -131,7 +131,16 @@ const Header = (props) => {
                       : "react-inner-menus"
                   }
                 >
-                  <ul id="backmenu" className="react-menus react-sub-shadow">
+                  <ul
+                    id="backmenu"
+                    className="react-menus react-sub-shadow"
+                    style={{
+                      display: "flex",
+                      flexWrap: "nowrap",
+                      alignItems: "center",
+                      padding: "0 0 0 20px",
+                    }}
+                  >
                     <MenuItems parentMenu={parentMenu} />
                   </ul>
                 </div>
