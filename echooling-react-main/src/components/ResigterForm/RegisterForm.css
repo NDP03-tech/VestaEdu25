@@ -1,0 +1,451 @@
+/* ============================================================
+   RegisterForm — Editorial Luxury Modal
+   Deep Navy · Warm Gold · Ivory
+   Cormorant Garamond (display) + DM Sans (body)
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap");
+
+/* ── Tokens ─────────────────────────────────────────────────── */
+:root {
+  --rf-navy: #0d1b2e;
+  --rf-navy-mid: #152540;
+  --rf-navy-light: #1e3558;
+  --rf-gold: #c9a84c;
+  --rf-gold-light: #e2c47a;
+  --rf-gold-pale: #f5e9c8;
+  --rf-ivory: #faf6ef;
+  --rf-ivory-dark: #ede4d3;
+  --rf-white: #ffffff;
+  --rf-text: #0d1b2e;
+  --rf-text-mid: #3a4e6b;
+  --rf-text-muted: #7a8fa8;
+  --rf-error: #c0392b;
+  --rf-error-bg: #fdf0ef;
+  --rf-success: #1a7a4a;
+  --rf-success-bg: #edf7f2;
+
+  --rf-radius: 12px;
+  --rf-radius-sm: 6px;
+  --rf-ease: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Backdrop ───────────────────────────────────────────────── */
+.rf-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(13, 27, 46, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: rfFadeIn 0.22s ease both;
+}
+
+/* ── Modal box ──────────────────────────────────────────────── */
+.rf-modal {
+  width: 100%;
+  max-width: 480px;
+  background: var(--rf-white);
+  border-radius: var(--rf-radius);
+  box-shadow: 0 24px 80px rgba(13, 27, 46, 0.35),
+    0 4px 20px rgba(13, 27, 46, 0.2);
+  overflow: hidden;
+  animation: rfSlideUp 0.32s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.rf-header {
+  background: var(--rf-navy);
+  padding: 24px 28px 22px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* gold grid texture */
+.rf-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      rgba(201, 168, 76, 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(201, 168, 76, 0.06) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events: none;
+}
+
+/* gold bottom border */
+.rf-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--rf-gold), transparent);
+}
+
+.rf-header-text {
+  position: relative;
+  z-index: 1;
+}
+
+.rf-eyebrow {
+  display: inline-block;
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rf-gold);
+  margin-bottom: 6px;
+}
+
+.rf-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--rf-ivory);
+  margin: 0;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  max-width: 340px;
+  /* clamp long titles */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Close button */
+.rf-close {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(250, 246, 239, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background var(--rf-ease), color var(--rf-ease),
+    border-color var(--rf-ease);
+  margin-top: 2px;
+}
+.rf-close:hover {
+  background: rgba(201, 168, 76, 0.15);
+  border-color: rgba(201, 168, 76, 0.4);
+  color: var(--rf-gold-light);
+}
+
+/* ── Body ───────────────────────────────────────────────────── */
+.rf-body {
+  padding: 32px 28px 28px;
+  background: var(--rf-ivory);
+}
+
+/* ── Form ───────────────────────────────────────────────────── */
+.rf-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rf-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.rf-label {
+  font-family: "DM Sans", sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rf-text-mid);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.rf-required {
+  color: var(--rf-gold);
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* Input wrap */
+.rf-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.rf-input-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--rf-text-muted);
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  transition: color var(--rf-ease);
+}
+
+.rf-input {
+  width: 100%;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14.5px;
+  font-weight: 400;
+  color: var(--rf-text);
+  background: var(--rf-white);
+  border: 1px solid var(--rf-ivory-dark);
+  border-radius: var(--rf-radius-sm);
+  padding: 12px 16px 12px 42px;
+  outline: none;
+  box-shadow: 0 1px 4px rgba(13, 27, 46, 0.04);
+  transition: border-color var(--rf-ease), box-shadow var(--rf-ease);
+}
+.rf-input::placeholder {
+  color: var(--rf-text-muted);
+  font-weight: 300;
+}
+.rf-input:focus {
+  border-color: var(--rf-gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15),
+    0 1px 4px rgba(13, 27, 46, 0.06);
+}
+.rf-input-wrap:focus-within .rf-input-icon {
+  color: var(--rf-gold);
+}
+
+/* Error banner */
+.rf-error {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--rf-error);
+  background: var(--rf-error-bg);
+  border: 1px solid rgba(192, 57, 43, 0.18);
+  border-radius: var(--rf-radius-sm);
+  padding: 11px 14px;
+  animation: rfShake 0.4s ease both;
+}
+.rf-error svg {
+  flex-shrink: 0;
+}
+
+/* Submit button */
+.rf-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--rf-navy);
+  background: var(--rf-gold);
+  border: none;
+  border-radius: var(--rf-radius-sm);
+  padding: 15px 24px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(201, 168, 76, 0.35);
+  transition: background var(--rf-ease), box-shadow var(--rf-ease),
+    transform var(--rf-ease);
+  margin-top: 4px;
+}
+/* shimmer sweep */
+.rf-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.28),
+    transparent
+  );
+  transition: left 0.45s ease;
+}
+.rf-btn:hover::before {
+  left: 160%;
+}
+.rf-btn:hover {
+  background: var(--rf-gold-light);
+  box-shadow: 0 6px 24px rgba(201, 168, 76, 0.5);
+  transform: translateY(-2px);
+}
+.rf-btn:active {
+  transform: translateY(0);
+}
+.rf-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+.rf-btn svg {
+  transition: transform var(--rf-ease);
+}
+.rf-btn:hover:not(:disabled) svg {
+  transform: translateX(3px);
+}
+
+/* Spinner inside button */
+.rf-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(13, 27, 46, 0.2);
+  border-top-color: var(--rf-navy);
+  border-radius: 50%;
+  animation: rfSpin 0.7s linear infinite;
+  display: inline-block;
+}
+
+/* Note under button */
+.rf-note {
+  font-family: "DM Sans", sans-serif;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--rf-text-muted);
+  text-align: center;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Success state ──────────────────────────────────────────── */
+.rf-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 16px 12px 8px;
+  gap: 16px;
+  animation: rfFadeIn 0.4s ease both;
+}
+
+.rf-success-ring {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--rf-success-bg);
+  border: 2px solid var(--rf-success);
+  color: var(--rf-success);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: rfScalePop 0.5s cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+.rf-success-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--rf-navy);
+  margin: 0;
+}
+
+.rf-success-sub {
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--rf-text-mid);
+  line-height: 1.72;
+  margin: 0;
+  max-width: 320px;
+}
+
+/* ── Keyframes ──────────────────────────────────────────────── */
+@keyframes rfFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes rfSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+@keyframes rfShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-5px);
+  }
+  40% {
+    transform: translateX(5px);
+  }
+  60% {
+    transform: translateX(-3px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+}
+@keyframes rfScalePop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes rfSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 520px) {
+  .rf-modal {
+    border-radius: 10px;
+  }
+  .rf-header {
+    padding: 20px 20px 18px;
+  }
+  .rf-body {
+    padding: 24px 20px 22px;
+  }
+  .rf-title {
+    font-size: 19px;
+  }
+}

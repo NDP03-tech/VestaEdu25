@@ -19,9 +19,7 @@ const Instructor = () => {
 
             <div className="react-wrapper">
                 <div className="react-wrapper-inner">
-                    <Breadcrumb
-                        pageTitle="Instructor"
-                    />
+                  
 
                     <InstructorMain />
 

@@ -1,0 +1,380 @@
+/* ============================================================
+   InstructorMain — Editorial Luxury · Instructor Grid
+   Deep Navy · Warm Gold · Ivory
+   Cormorant Garamond (display) + DM Sans (body)
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap");
+
+/* ── Tokens ─────────────────────────────────────────────────── */
+:root {
+  --im-navy: #0d1b2e;
+  --im-navy-mid: #152540;
+  --im-navy-light: #1e3558;
+  --im-gold: #c9a84c;
+  --im-gold-light: #e2c47a;
+  --im-gold-pale: #f5e9c8;
+  --im-ivory: #faf6ef;
+  --im-ivory-dark: #ede4d3;
+  --im-white: #ffffff;
+  --im-text: #0d1b2e;
+  --im-text-mid: #3a4e6b;
+  --im-text-muted: #7a8fa8;
+
+  --im-radius: 10px;
+  --im-radius-sm: 5px;
+  --im-ease: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --im-shadow: 0 2px 14px rgba(13, 27, 46, 0.07),
+    0 6px 28px rgba(13, 27, 46, 0.1);
+  --im-shadow-up: 0 16px 52px rgba(13, 27, 46, 0.18),
+    0 4px 16px rgba(13, 27, 46, 0.1);
+}
+
+/* ── Page ───────────────────────────────────────────────────── */
+.im-page {
+  font-family: "DM Sans", sans-serif;
+  background: var(--im-ivory);
+  background-image: radial-gradient(
+      ellipse 70% 40% at 100% 0%,
+      rgba(201, 168, 76, 0.07) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 50% 35% at 0% 100%,
+      rgba(13, 27, 46, 0.05) 0%,
+      transparent 55%
+    );
+  padding: 100px 0 120px;
+}
+
+.im-container {
+  width: min(90%, 1200px);
+  margin: 0 auto;
+}
+
+/* ── States ─────────────────────────────────────────────────── */
+.im-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
+  gap: 18px;
+  background: var(--im-ivory);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--im-text-muted);
+}
+.im-state--error p {
+  color: #b94a48;
+}
+.im-state-icon {
+  font-size: 26px;
+  color: var(--im-gold);
+  opacity: 0.5;
+}
+
+.im-spinner {
+  width: 34px;
+  height: 34px;
+  border: 2px solid var(--im-ivory-dark);
+  border-top-color: var(--im-gold);
+  border-radius: 50%;
+  animation: imSpin 0.8s linear infinite;
+}
+
+/* ── Page header ────────────────────────────────────────────── */
+.im-header {
+  text-align: center;
+  margin-bottom: 64px;
+  animation: imFadeUp 0.6s ease both;
+}
+
+.im-eyebrow {
+  display: inline-block;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--im-gold);
+  margin-bottom: 12px;
+}
+
+.im-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 600;
+  color: var(--im-navy);
+  margin: 0;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+
+.im-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 18px 0 22px;
+}
+.im-rule span:not(.im-diamond) {
+  display: block;
+  height: 1px;
+  width: 60px;
+}
+.im-rule span:first-child {
+  background: linear-gradient(90deg, transparent, var(--im-gold));
+}
+.im-rule span:last-child {
+  background: linear-gradient(90deg, var(--im-gold), transparent);
+}
+.im-diamond {
+  font-size: 8px;
+  color: var(--im-gold);
+}
+
+.im-subtitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 19px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--im-text-mid);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ── Grid ───────────────────────────────────────────────────── */
+.im-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+}
+
+/* ── Card ───────────────────────────────────────────────────── */
+.im-card {
+  background: var(--im-white);
+  border: 1px solid var(--im-ivory-dark);
+  border-radius: var(--im-radius);
+  box-shadow: var(--im-shadow);
+  overflow: hidden;
+  animation: imFadeUp 0.55s ease both;
+  transition: transform var(--im-ease), box-shadow var(--im-ease),
+    border-color var(--im-ease);
+}
+.im-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--im-shadow-up);
+  border-color: rgba(201, 168, 76, 0.38);
+}
+
+/* ── Card image ─────────────────────────────────────────────── */
+.im-card-img {
+  position: relative;
+  width: 100%;
+  padding-top: 115%; /* portrait ratio */
+  overflow: hidden;
+  background: var(--im-navy-mid);
+}
+
+.im-card-img img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.im-card:hover .im-card-img img {
+  transform: scale(1.06);
+}
+
+/* ── Hover overlay ──────────────────────────────────────────── */
+.im-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(13, 27, 46, 0.92) 0%,
+    rgba(13, 27, 46, 0.75) 50%,
+    rgba(13, 27, 46, 0.3) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 24px 18px 22px;
+  gap: 14px;
+  opacity: 0;
+  transition: opacity var(--im-ease);
+}
+.im-card:hover .im-card-overlay {
+  opacity: 1;
+}
+
+/* Bio text */
+.im-card-bio {
+  font-family: "DM Sans", sans-serif;
+  font-size: 12.5px;
+  font-weight: 300;
+  color: rgba(250, 246, 239, 0.75);
+  line-height: 1.65;
+  text-align: center;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Social buttons */
+.im-card-socials {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.im-social-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: rgba(250, 246, 239, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: background var(--im-ease), border-color var(--im-ease),
+    color var(--im-ease), transform var(--im-ease);
+}
+.im-social-btn:hover {
+  background: var(--im-gold);
+  border-color: var(--im-gold);
+  color: var(--im-navy);
+  transform: translateY(-2px);
+}
+
+/* Profile CTA */
+.im-card-profile-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--im-navy);
+  background: var(--im-gold);
+  border-radius: var(--im-radius-sm);
+  padding: 8px 16px;
+  transition: background var(--im-ease), box-shadow var(--im-ease);
+}
+.im-card-profile-btn:hover {
+  background: var(--im-gold-light);
+  box-shadow: 0 4px 16px rgba(201, 168, 76, 0.45);
+}
+.im-card-profile-btn svg {
+  transition: transform var(--im-ease);
+}
+.im-card-profile-btn:hover svg {
+  transform: translateX(3px);
+}
+
+/* ── Card info (bottom) ─────────────────────────────────────── */
+.im-card-info {
+  padding: 18px 18px 16px;
+  text-align: center;
+  position: relative;
+}
+
+.im-card-name {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--im-navy);
+  margin: 0 0 5px;
+  line-height: 1.25;
+}
+.im-card-name a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--im-ease);
+}
+.im-card-name a:hover {
+  color: var(--im-gold);
+}
+
+.im-card-role {
+  font-family: "DM Sans", sans-serif;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--im-text-muted);
+  margin: 0 0 14px;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Animated gold underline */
+.im-card-accent {
+  width: 24px;
+  height: 2px;
+  background: var(--im-gold);
+  border-radius: 1px;
+  margin: 0 auto;
+  transition: width var(--im-ease);
+}
+.im-card:hover .im-card-accent {
+  width: 48px;
+}
+
+/* ── Keyframes ──────────────────────────────────────────────── */
+@keyframes imFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes imSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .im-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 768px) {
+  .im-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .im-page {
+    padding: 72px 0 90px;
+  }
+}
+@media (max-width: 480px) {
+  .im-grid {
+    grid-template-columns: 1fr;
+    max-width: 320px;
+    margin: 0 auto;
+  }
+  .im-title {
+    font-size: 36px;
+  }
+}

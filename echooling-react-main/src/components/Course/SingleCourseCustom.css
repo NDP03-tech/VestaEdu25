@@ -1,68 +1,337 @@
-.meta-course {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Khoảng cách giữa các mục */
-    flex-wrap: wrap; /* Nếu không đủ chỗ sẽ xuống dòng */
-    list-style: none;
-    padding: 0;
-    margin: 10px 0;
-}
-.case-title{
-    font-weight: bold;
-}
-.meta-course li {
-    display: flex;
-    align-items: center;
-    
-    gap: 8px; /* Khoảng cách giữa icon và nội dung */
+/* ============================================================
+   SingleCourseCustom — Vertical Grid Card
+   Đủ chỗ cho mọi thông tin · 3-column grid friendly
+   Navy · Gold · Ivory  ·  Cormorant Garamond + DM Sans
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
+
+/* ── Tokens ─────────────────────────────────────────────────── */
+:root {
+  --c-navy:       #0d1b2e;
+  --c-navy-mid:   #152540;
+  --c-gold:       #c9a84c;
+  --c-gold-pale:  #faf0d7;
+  --c-ivory:      #faf7f2;
+  --c-border:     #e8e2d9;
+  --c-white:      #ffffff;
+  --c-text:       #1a2a3a;
+  --c-text-mid:   #4a5e72;
+  --c-text-muted: #8a9bb0;
+
+  --radius:     10px;
+  --radius-sm:   4px;
+  --ease:       0.22s cubic-bezier(.4,0,.2,1);
+  --shadow:     0 1px 4px rgba(13,27,46,.06), 0 4px 18px rgba(13,27,46,.09);
+  --shadow-up:  0 8px 32px rgba(13,27,46,.15), 0 2px 8px rgba(13,27,46,.08);
 }
 
-.react-ratings {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 10px;
+/* ── Outer ──────────────────────────────────────────────────── */
+.scc-outer {
+  width: 100%;
+  height: 100%;
+  font-family: 'DM Sans', sans-serif;
 }
 
-.react-book {
-    display: flex;
-    align-items: center;
-    gap: 5px;
+/* ── Card ───────────────────────────────────────────────────── */
+.scc-card {
+  display: flex;
+  flex-direction: column;   /* VERTICAL layout */
+  height: 100%;
+  background: var(--c-white);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transition:
+    box-shadow var(--ease),
+    border-color var(--ease),
+    transform var(--ease);
+}
+.scc-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-up);
+  border-color: rgba(201,168,76,.4);
 }
 
-.react-ratings .price {
-    font-weight: bold;
-    color: #007bff; /* Màu xanh cho giá tiền */
-    font-size: 1.2rem;
+/* Gold shimmer on top edge */
+.scc-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius);
+  border-top: 2px solid transparent;
+  background: linear-gradient(var(--c-white), var(--c-white)) padding-box,
+              linear-gradient(90deg, transparent, var(--c-gold), transparent) border-box;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--ease);
 }
-.single-studies {
-    background: white;
-    border-radius: 12px; /* Bo góc lớn hơn */
-    min-height: 400px;
-    padding: 15px; /* Tăng padding để nội dung rộng hơn */
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15); /* Tăng bóng cho rõ hơn */
-    transform: scale(1.1); /* Phóng to toàn bộ component */
+.scc-card:hover::before { opacity: 1; }
+.scc-card { position: relative; }
+
+/* ── Thumbnail ──────────────────────────────────────────────── */
+.scc-thumb {
+  position: relative;
+  display: block;
+  width: 100%;
+  /* Fixed height — ảnh luôn đầy đủ, không bị cắt lạ */
+  height: 185px;
+  overflow: hidden;
+  background: var(--c-navy-mid);
+  flex-shrink: 0;
 }
-.single-studies:hover {
-    transform: translateY(-5px); /* Hiệu ứng nổi lên khi hover */
-    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Đổ bóng mạnh hơn khi hover */
+
+.scc-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(.4,0,.2,1);
 }
-.case-img img {
-    width: 100%;  /* Để ảnh rộng tối đa */
-    height: auto; /* Giữ tỷ lệ gốc, không bị méo */
-    object-fit: contain; /* Hiển thị toàn bộ ảnh mà không bị cắt */
-    border-radius: 8px; /* Bo góc nhẹ nếu cần */
+.scc-card:hover .scc-thumb img {
+  transform: scale(1.05);
 }
-.inner-course {
-    padding-bottom: 20px; /* Tạo khoảng trống dưới nội dung */
+
+/* Overlay */
+.scc-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(13,27,46,.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--ease);
 }
-.case-content {
-    margin-top: 20px; /* Đẩy nội dung xuống */
+.scc-card:hover .scc-thumb-overlay { opacity: 1; }
+
+.scc-play-ring {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background: var(--c-gold);
+  color: var(--c-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 2px;
+  box-shadow: 0 4px 20px rgba(201,168,76,.55);
+  transform: scale(.8);
+  transition: transform var(--ease);
 }
-.icon_star{
-color: #d4a017;
+.scc-card:hover .scc-play-ring { transform: scale(1); }
+
+/* Category badge — top-left */
+.scc-badge-cat {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--c-navy);
+  background: var(--c-gold);
+  border-radius: var(--radius-sm);
+  padding: 4px 9px;
+  box-shadow: 0 2px 8px rgba(13,27,46,.2);
+  line-height: 1;
 }
-em {
-    color: #d4a017;
+
+/* Level badge — top-right */
+.scc-badge-level {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: #fff;
+  background: rgba(13,27,46,.72);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: var(--radius-sm);
+  padding: 4px 9px;
+  line-height: 1;
+}
+
+/* ── Body ───────────────────────────────────────────────────── */
+.scc-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;               /* fill remaining height */
+  padding: 18px 18px 16px;
+  gap: 0;
+}
+
+/* Title */
+.scc-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.42;
+  color: var(--c-text);
+  margin: 0 0 10px;
+}
+.scc-title a {
+  color: inherit;
+  text-decoration: none;
+  /* Show max 2 lines, then ellipsis */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color var(--ease);
+}
+.scc-title a:hover { color: var(--c-gold); }
+
+/* Author */
+.scc-author {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--c-text-mid);
+  margin: 0 0 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.scc-author svg { color: var(--c-gold); flex-shrink: 0; }
+
+/* Stats row */
+.scc-stats {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.scc-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--c-text-muted);
+  white-space: nowrap;
+}
+.scc-stat svg { color: var(--c-gold); flex-shrink: 0; }
+
+/* Rating */
+.scc-rating {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 14px;
+}
+
+.scc-score {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--c-gold);
+  line-height: 1;
+}
+
+.scc-stars {
+  display: flex;
+  gap: 2px;
+}
+
+/* Divider */
+.scc-divider {
+  height: 1px;
+  background: var(--c-border);
+  margin-bottom: 14px;
+  flex-shrink: 0;
+}
+
+/* Footer: price + button — pushed to bottom */
+.scc-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.scc-price-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.scc-original {
+  font-size: 12px;
+  color: var(--c-text-muted);
+  text-decoration: line-through;
+  line-height: 1;
+}
+
+.scc-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--c-navy);
+  letter-spacing: .01em;
+  line-height: 1;
+}
+
+.scc-price.is-free {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #1a7a4a;
+  background: #edf7f2;
+  border-radius: var(--radius-sm);
+  padding: 5px 11px;
+}
+
+/* Button */
+.scc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-decoration: none;
+  color: var(--c-white);
+  background: var(--c-navy);
+  border-radius: var(--radius-sm);
+  padding: 9px 16px;
+  transition:
+    background var(--ease),
+    color var(--ease),
+    box-shadow var(--ease);
+}
+.scc-btn:hover {
+  background: var(--c-gold);
+  color: var(--c-navy);
+  box-shadow: 0 4px 16px rgba(201,168,76,.4);
+}
+.scc-btn svg { transition: transform var(--ease); }
+.scc-btn:hover svg { transform: translateX(3px); }
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 991px) {
+  .scc-thumb { height: 170px; }
+  .scc-title { font-size: 17px; }
+}
+
+@media (max-width: 576px) {
+  .scc-thumb { height: 200px; }
+  .scc-body  { padding: 16px 14px 14px; }
+  .scc-title { font-size: 16.5px; }
+  .scc-price { font-size: 19px; }
 }

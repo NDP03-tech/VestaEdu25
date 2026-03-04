@@ -1,43 +1,36 @@
-import React from 'react';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import Breadcrumb from '../../components/Breadcrumb';
-import ContactMain from './ContactMain';
-import ScrollToTop from '../../components/ScrollTop';
+import React from "react";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import Breadcrumb from "../../components/Breadcrumb";
+import ContactMain from "./ContactMain";
+import ScrollToTop from "../../components/ScrollTop";
 
 // Image
-import Logo from '../../assets/images/logos/logo2.png';
+import Logo from "../../assets/images/logos/logo2.png";
 
 const Contact = () => {
-    return (
-        <>
-            <Header
-                parentMenu='contact'
-                menuCategoryEnable='enable'
-                headerNormalLogo={Logo}
-                headerStickyLogo={Logo}
-            />
+  return (
+    <>
+      <Header
+        parentMenu="contact"
+        menuCategoryEnable="enable"
+        headerNormalLogo={Logo}
+        headerStickyLogo={Logo}
+      />
 
-            <div className="react-wrapper">
-                <div className="react-wrapper-inner">
-                    <Breadcrumb
-                        pageTitle="Contact"
-                    />
+      <div className="react-wrapper">
+        <div className="react-wrapper-inner">
+          <ContactMain />
 
-                    <ContactMain />
+          {/* scrolltop-start */}
+          <ScrollToTop />
+          {/* scrolltop-end */}
+        </div>
+      </div>
 
-                    {/* scrolltop-start */}
-                    <ScrollToTop />
-                    {/* scrolltop-end */}
-                </div>
-            </div>
-
-            <Footer />
-
-        </>
-    );
-}
-
+      <Footer />
+    </>
+  );
+};
 
 export default Contact;
-

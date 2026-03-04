@@ -1,0 +1,407 @@
+/* ============================================================
+   FooterTwo — Editorial Luxury Footer
+   Deep Navy · Warm Gold · Ivory
+   Cormorant Garamond (display) + DM Sans (body)
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap");
+
+/* ── Tokens ─────────────────────────────────────────────────── */
+:root {
+  --f2-navy: #0d1b2e;
+  --f2-navy-mid: #152540;
+  --f2-navy-light: #1e3558;
+  --f2-gold: #c9a84c;
+  --f2-gold-light: #e2c47a;
+  --f2-gold-pale: #f5e9c8;
+  --f2-ivory: #faf6ef;
+  --f2-ivory-dark: #ede4d3;
+  --f2-white: #ffffff;
+  --f2-ease: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Base ───────────────────────────────────────────────────── */
+.ft2-footer {
+  font-family: "DM Sans", sans-serif;
+  background: var(--f2-navy);
+}
+
+.ft2-container {
+  width: min(90%, 1160px);
+  margin: 0 auto;
+}
+
+/* ══════════════════════════════════════════════════════════════
+      CTA BANNER
+   ══════════════════════════════════════════════════════════════ */
+.ft2-cta {
+  background: var(--f2-navy-mid);
+  border-bottom: 1px solid rgba(201, 168, 76, 0.18);
+  padding: 52px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* grid texture */
+.ft2-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      rgba(201, 168, 76, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(201, 168, 76, 0.05) 1px, transparent 1px);
+  background-size: 52px 52px;
+  pointer-events: none;
+}
+
+/* gold glow */
+.ft2-cta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 60% 80% at 80% 50%,
+    rgba(201, 168, 76, 0.08) 0%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.ft2-cta-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.ft2-cta-text {
+  flex: 1 1 380px;
+}
+
+.ft2-cta-eyebrow {
+  display: inline-block;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--f2-gold);
+  margin-bottom: 10px;
+}
+
+.ft2-cta-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(26px, 3.5vw, 38px);
+  font-weight: 600;
+  color: var(--f2-ivory);
+  line-height: 1.25;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.ft2-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--f2-navy);
+  background: var(--f2-gold);
+  border-radius: 5px;
+  padding: 14px 28px;
+  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.35);
+  transition: background var(--f2-ease), box-shadow var(--f2-ease),
+    transform var(--f2-ease);
+}
+.ft2-cta-btn:hover {
+  background: var(--f2-gold-light);
+  box-shadow: 0 6px 28px rgba(201, 168, 76, 0.5);
+  transform: translateY(-2px);
+}
+.ft2-cta-btn svg {
+  transition: transform var(--f2-ease);
+}
+.ft2-cta-btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* ══════════════════════════════════════════════════════════════
+      MAIN BODY
+   ══════════════════════════════════════════════════════════════ */
+.ft2-body {
+  padding: 72px 0 60px;
+  position: relative;
+}
+
+/* top rule */
+.ft2-body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 168, 76, 0.25),
+    rgba(201, 168, 76, 0.25),
+    transparent
+  );
+}
+
+.ft2-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1.3fr;
+  gap: 48px 40px;
+}
+
+/* ── Column base ────────────────────────────────────────────── */
+.ft2-col-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--f2-ivory);
+  margin: 0 0 12px;
+  letter-spacing: 0.03em;
+}
+
+.ft2-col-rule {
+  width: 28px;
+  height: 2px;
+  background: var(--f2-gold);
+  border-radius: 1px;
+  margin-bottom: 22px;
+}
+
+/* ── Brand column ───────────────────────────────────────────── */
+.ft2-logo {
+  display: inline-block;
+  margin-bottom: 20px;
+}
+.ft2-logo img {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.9;
+}
+
+.ft2-tagline {
+  font-size: 13.5px;
+  font-weight: 300;
+  color: rgba(250, 246, 239, 0.5);
+  line-height: 1.72;
+  margin: 0 0 24px;
+  max-width: 240px;
+}
+
+.ft2-contact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.ft2-contact li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.ft2-contact-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  background: rgba(201, 168, 76, 0.1);
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--f2-gold);
+  transition: background var(--f2-ease), border-color var(--f2-ease);
+}
+.ft2-contact li:hover .ft2-contact-icon {
+  background: rgba(201, 168, 76, 0.2);
+  border-color: rgba(201, 168, 76, 0.35);
+}
+.ft2-contact a {
+  font-size: 13.5px;
+  font-weight: 400;
+  color: rgba(250, 246, 239, 0.55);
+  text-decoration: none;
+  transition: color var(--f2-ease);
+}
+.ft2-contact a:hover {
+  color: var(--f2-gold-light);
+}
+
+/* ── Nav columns ────────────────────────────────────────────── */
+.ft2-nav {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ft2-nav li a {
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(250, 246, 239, 0.5);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  transition: color var(--f2-ease), gap var(--f2-ease);
+  position: relative;
+  padding-left: 0;
+}
+/* arrow reveal on hover */
+.ft2-nav li a::before {
+  content: "→";
+  font-size: 12px;
+  color: var(--f2-gold);
+  opacity: 0;
+  max-width: 0;
+  overflow: hidden;
+  transition: opacity var(--f2-ease), max-width var(--f2-ease);
+  display: inline-block;
+  margin-right: 0;
+}
+.ft2-nav li a:hover {
+  color: var(--f2-ivory);
+  padding-left: 0;
+}
+.ft2-nav li a:hover::before {
+  opacity: 1;
+  max-width: 20px;
+  margin-right: 6px;
+}
+
+/* ── Newsletter / Connect column ────────────────────────────── */
+.ft2-newsletter-text {
+  font-size: 13.5px;
+  font-weight: 300;
+  color: rgba(250, 246, 239, 0.5);
+  line-height: 1.72;
+  margin: 0 0 22px;
+}
+
+.ft2-socials {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ft2-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(250, 246, 239, 0.6);
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  padding: 10px 16px;
+  transition: background var(--f2-ease), border-color var(--f2-ease),
+    color var(--f2-ease);
+}
+.ft2-social-btn:hover {
+  background: rgba(201, 168, 76, 0.1);
+  border-color: rgba(201, 168, 76, 0.3);
+  color: var(--f2-gold-light);
+}
+.ft2-social-btn svg {
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════════════════════════════════════
+      COPYRIGHT BAR
+   ══════════════════════════════════════════════════════════════ */
+.ft2-copyright {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  padding: 20px 0;
+}
+
+.ft2-copyright-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.ft2-copyright p {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(250, 246, 239, 0.35);
+  margin: 0;
+}
+.ft2-copyright a {
+  color: rgba(250, 246, 239, 0.55);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color var(--f2-ease);
+}
+.ft2-copyright a:hover {
+  color: var(--f2-gold);
+}
+
+.ft2-copyright-right {
+  text-align: right;
+}
+
+.ft2-heart {
+  color: var(--f2-gold);
+  font-size: 12px;
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .ft2-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 32px;
+  }
+}
+
+@media (max-width: 640px) {
+  .ft2-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .ft2-cta-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .ft2-cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .ft2-body {
+    padding: 52px 0 44px;
+  }
+  .ft2-copyright-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+  .ft2-copyright-right {
+    text-align: center;
+  }
+}

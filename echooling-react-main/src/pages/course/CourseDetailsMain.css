@@ -1,0 +1,563 @@
+/* ============================================================
+   CourseDetailsMain — Editorial Luxury
+   Deep Navy · Warm Gold · Ivory
+   Cormorant Garamond (display) + DM Sans (body)
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap");
+
+/* ── Tokens ─────────────────────────────────────────────────── */
+:root {
+  --cd-navy: #0d1b2e;
+  --cd-navy-mid: #152540;
+  --cd-navy-light: #1e3558;
+  --cd-gold: #c9a84c;
+  --cd-gold-light: #e2c47a;
+  --cd-gold-pale: #f5e9c8;
+  --cd-ivory: #faf6ef;
+  --cd-ivory-dark: #ede4d3;
+  --cd-white: #ffffff;
+  --cd-text: #0d1b2e;
+  --cd-text-mid: #3a4e6b;
+  --cd-text-muted: #7a8fa8;
+
+  --cd-radius: 10px;
+  --cd-radius-sm: 5px;
+  --cd-ease: 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+  --cd-shadow: 0 2px 14px rgba(13, 27, 46, 0.07),
+    0 8px 36px rgba(13, 27, 46, 0.1);
+  --cd-shadow-lg: 0 16px 56px rgba(13, 27, 46, 0.16);
+}
+
+/* ── Page ───────────────────────────────────────────────────── */
+.cdm-page {
+  font-family: "DM Sans", sans-serif;
+  background: var(--cd-ivory);
+  min-height: 100vh;
+  padding: 60px 0 100px;
+}
+
+.cdm-container {
+  width: min(92%, 1200px);
+  margin: 0 auto;
+}
+
+/* ── Layout: main + sidebar ──────────────────────────────────── */
+.cdm-layout {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 36px;
+  align-items: start;
+}
+
+/* ══════════════════════════════════════════════════════════════
+      STATES (loading / error / empty)
+   ══════════════════════════════════════════════════════════════ */
+.cdm-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 55vh;
+  gap: 18px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 20px;
+  font-style: italic;
+  color: var(--cd-text-muted);
+  background: var(--cd-ivory);
+}
+.cdm-state--error p {
+  color: #b94a48;
+}
+.cdm-state--warn p {
+  color: var(--cd-gold);
+}
+.cdm-state-icon {
+  font-size: 28px;
+  color: var(--cd-gold);
+  opacity: 0.5;
+}
+
+.cdm-spinner {
+  width: 36px;
+  height: 36px;
+  border: 2px solid var(--cd-ivory-dark);
+  border-top-color: var(--cd-gold);
+  border-radius: 50%;
+  animation: cdmSpin 0.8s linear infinite;
+  display: inline-block;
+}
+
+/* ══════════════════════════════════════════════════════════════
+      TABS
+   ══════════════════════════════════════════════════════════════ */
+.cdm-tablist {
+  display: flex;
+  gap: 4px;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 0;
+  border-bottom: 2px solid var(--cd-ivory-dark);
+}
+
+.cdm-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--cd-text-muted);
+  padding: 13px 22px 11px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: color var(--cd-ease), border-color var(--cd-ease);
+  user-select: none;
+}
+.cdm-tab:hover {
+  color: var(--cd-navy);
+}
+
+.cdm-tab--active {
+  color: var(--cd-navy);
+  border-bottom-color: var(--cd-gold);
+  font-weight: 600;
+}
+.cdm-tab--active svg {
+  color: var(--cd-gold);
+}
+
+/* ══════════════════════════════════════════════════════════════
+      PANELS
+   ══════════════════════════════════════════════════════════════ */
+.cdm-panel {
+  background: var(--cd-white);
+  border: 1px solid var(--cd-ivory-dark);
+  border-radius: 0 0 var(--cd-radius) var(--cd-radius);
+  box-shadow: var(--cd-shadow);
+  padding: 40px 44px 44px;
+  animation: cdmFadeUp 0.4s ease both;
+}
+
+.cdm-panel-header {
+  margin-bottom: 32px;
+}
+
+.cdm-eyebrow {
+  display: inline-block;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--cd-gold);
+  margin-bottom: 10px;
+}
+
+.cdm-panel-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 600;
+  color: var(--cd-navy);
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.cdm-rule {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+.cdm-rule span:not(.cdm-diamond) {
+  display: block;
+  height: 1px;
+  width: 48px;
+}
+.cdm-rule span:first-child {
+  background: linear-gradient(90deg, transparent, var(--cd-gold));
+}
+.cdm-rule span:last-child {
+  background: linear-gradient(90deg, var(--cd-gold), transparent);
+}
+.cdm-diamond {
+  font-size: 7px;
+  color: var(--cd-gold);
+}
+
+/* Rich text content */
+.cdm-content-body {
+  font-family: "DM Sans", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.82;
+  color: var(--cd-text-mid);
+}
+.cdm-content-body h1,
+.cdm-content-body h2,
+.cdm-content-body h3 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 600;
+  color: var(--cd-navy);
+  margin-top: 28px;
+  margin-bottom: 12px;
+}
+.cdm-content-body h2 {
+  font-size: 24px;
+}
+.cdm-content-body h3 {
+  font-size: 20px;
+}
+.cdm-content-body p {
+  margin-bottom: 16px;
+}
+.cdm-content-body strong {
+  color: var(--cd-navy);
+  font-weight: 600;
+}
+.cdm-content-body em {
+  color: var(--cd-text-mid);
+}
+.cdm-content-body ul,
+.cdm-content-body ol {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+.cdm-content-body li {
+  margin-bottom: 6px;
+}
+.cdm-content-body a {
+  color: var(--cd-gold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Calendar */
+.cdm-calendar-wrap {
+  border-radius: var(--cd-radius-sm);
+  overflow: hidden;
+}
+
+/* FullCalendar overrides */
+.cdm-calendar-wrap .fc {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+}
+.cdm-calendar-wrap .fc-toolbar-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--cd-navy);
+}
+.cdm-calendar-wrap .fc-button-primary {
+  background: var(--cd-navy) !important;
+  border-color: var(--cd-navy) !important;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  border-radius: var(--cd-radius-sm) !important;
+  padding: 6px 14px !important;
+  transition: background var(--cd-ease) !important;
+}
+.cdm-calendar-wrap .fc-button-primary:hover {
+  background: var(--cd-navy-light) !important;
+}
+.cdm-calendar-wrap .fc-button-active {
+  background: var(--cd-gold) !important;
+  border-color: var(--cd-gold) !important;
+  color: var(--cd-navy) !important;
+}
+.cdm-calendar-wrap .fc-daygrid-day-number {
+  color: var(--cd-text-mid);
+  font-weight: 500;
+}
+.cdm-calendar-wrap .fc-col-header-cell-cushion {
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cd-text-muted);
+}
+.cdm-calendar-wrap .fc-event {
+  border-radius: 3px !important;
+  font-size: 11px !important;
+  font-weight: 600 !important;
+  padding: 2px 6px !important;
+}
+
+/* ══════════════════════════════════════════════════════════════
+      SIDEBAR CARD
+   ══════════════════════════════════════════════════════════════ */
+.cdm-sidebar {
+  position: sticky;
+  top: 28px;
+}
+
+.cdm-sidebar-card {
+  background: var(--cd-white);
+  border: 1px solid var(--cd-ivory-dark);
+  border-radius: var(--cd-radius);
+  box-shadow: var(--cd-shadow-lg);
+  overflow: hidden;
+  animation: cdmFadeUp 0.5s 0.1s ease both;
+}
+
+/* Price block */
+.cdm-price-block {
+  background: var(--cd-navy);
+  padding: 28px 28px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.cdm-price-block::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cd-gold), transparent);
+}
+/* faint grid */
+.cdm-price-block::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(
+      rgba(201, 168, 76, 0.06) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(201, 168, 76, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+}
+
+.cdm-price-label {
+  display: block;
+  position: relative;
+  z-index: 1;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(250, 246, 239, 0.5);
+  margin-bottom: 8px;
+}
+
+.cdm-price {
+  position: relative;
+  z-index: 1;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--cd-gold);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.cdm-price--free {
+  font-size: 28px;
+  font-style: italic;
+  color: var(--cd-gold-light);
+}
+
+/* Sidebar body */
+.cdm-sidebar-divider {
+  height: 1px;
+  background: var(--cd-ivory-dark);
+}
+
+.cdm-sidebar-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--cd-navy);
+  padding: 22px 28px 14px;
+  margin: 0;
+}
+
+/* Info list */
+.cdm-info-list {
+  list-style: none;
+  padding: 0 28px 22px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.cdm-info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.cdm-info-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: var(--cd-gold-pale);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--cd-gold);
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.cdm-info-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.cdm-info-label {
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cd-text-muted);
+}
+.cdm-info-value {
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--cd-text);
+  line-height: 1.4;
+}
+
+/* Enroll button */
+.cdm-enroll-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: calc(100% - 56px);
+  margin: 0 28px 12px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cd-navy);
+  background: var(--cd-gold);
+  border: none;
+  border-radius: var(--cd-radius-sm);
+  padding: 15px 20px;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(201, 168, 76, 0.35);
+  position: relative;
+  overflow: hidden;
+  transition: background var(--cd-ease), box-shadow var(--cd-ease),
+    transform var(--cd-ease);
+}
+/* shimmer sweep */
+.cdm-enroll-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transition: left 0.45s ease;
+}
+.cdm-enroll-btn:hover::before {
+  left: 160%;
+}
+.cdm-enroll-btn:hover {
+  background: var(--cd-gold-light);
+  box-shadow: 0 6px 24px rgba(201, 168, 76, 0.5);
+  transform: translateY(-2px);
+}
+.cdm-enroll-btn:active {
+  transform: translateY(0);
+}
+.cdm-enroll-btn svg {
+  transition: transform var(--cd-ease);
+}
+.cdm-enroll-btn:hover svg {
+  transform: translateX(4px);
+}
+
+.cdm-enroll-note {
+  font-family: "DM Sans", sans-serif;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--cd-text-muted);
+  text-align: center;
+  padding: 0 28px 22px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ── Keyframes ──────────────────────────────────────────────── */
+@keyframes cdmFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes cdmSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .cdm-layout {
+    grid-template-columns: 1fr;
+  }
+  .cdm-sidebar {
+    position: static;
+  }
+  .cdm-sidebar-card {
+    max-width: 480px;
+  }
+}
+
+@media (max-width: 640px) {
+  .cdm-page {
+    padding: 32px 0 72px;
+  }
+  .cdm-panel {
+    padding: 28px 22px 32px;
+  }
+  .cdm-tab {
+    padding: 11px 14px 9px;
+    font-size: 12px;
+  }
+  .cdm-price {
+    font-size: 32px;
+  }
+  .cdm-info-list {
+    padding: 0 20px 18px;
+  }
+  .cdm-enroll-btn {
+    width: calc(100% - 40px);
+    margin: 0 20px 10px;
+  }
+  .cdm-enroll-note {
+    padding: 0 20px 18px;
+  }
+}

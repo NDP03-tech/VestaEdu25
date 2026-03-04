@@ -1,0 +1,28 @@
+/* ============================================================
+   HomeMain — Scroll Reveal Animations
+   Each section fades up from below when scrolled into view
+   ============================================================ */
+
+/* ── Reveal block: hidden by default ───────────────────────── */
+.reveal-block {
+  opacity: 0;
+  transform: translateY(48px);
+  transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1) var(--reveal-delay, 0ms),
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+/* ── Visible state: triggered by IntersectionObserver ──────── */
+.reveal-block.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Respect user preference for reduced motion ────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal-block {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

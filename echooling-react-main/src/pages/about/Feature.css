@@ -1,0 +1,336 @@
+/* ============================================================
+   Feature — USP Section · Editorial Luxury
+   Deep Navy · Warm Gold · Ivory
+   Cormorant Garamond (display) + DM Sans (body)
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap");
+
+/* ── Tokens ─────────────────────────────────────────────────── */
+:root {
+  --ft-navy: #0d1b2e;
+  --ft-navy-mid: #152540;
+  --ft-navy-light: #1e3558;
+  --ft-gold: #c9a84c;
+  --ft-gold-light: #e2c47a;
+  --ft-gold-pale: #f5e9c8;
+  --ft-ivory: #faf6ef;
+  --ft-ivory-dark: #ede4d3;
+  --ft-white: #ffffff;
+  --ft-text-mid: #3a4e6b;
+  --ft-text-muted: #7a8fa8;
+
+  --ft-radius: 12px;
+  --ft-radius-sm: 5px;
+  --ft-ease: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  --ft-shadow: 0 2px 14px rgba(13, 27, 46, 0.07),
+    0 8px 32px rgba(13, 27, 46, 0.1);
+  --ft-shadow-up: 0 12px 48px rgba(13, 27, 46, 0.18),
+    0 4px 16px rgba(13, 27, 46, 0.1);
+}
+
+/* ── Section wrapper ────────────────────────────────────────── */
+.ft-section {
+  font-family: "DM Sans", sans-serif;
+  background: var(--ft-ivory);
+  background-image: radial-gradient(
+      ellipse 65% 45% at 100% 0%,
+      rgba(201, 168, 76, 0.07) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 50% 35% at 0% 100%,
+      rgba(13, 27, 46, 0.05) 0%,
+      transparent 60%
+    );
+  padding: 100px 0 110px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* faint horizontal rule at top */
+.ft-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--ft-gold-pale),
+    transparent
+  );
+}
+
+.ft-container {
+  width: min(90%, 1140px);
+  margin: 0 auto;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.ft-header {
+  text-align: center;
+  margin-bottom: 64px;
+  animation: ftFadeUp 0.6s ease both;
+}
+
+.ft-eyebrow {
+  display: inline-block;
+  font-family: "DM Sans", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ft-gold);
+  margin-bottom: 14px;
+}
+
+.ft-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: clamp(34px, 5vw, 52px);
+  font-weight: 600;
+  color: var(--ft-navy);
+  margin: 0;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+}
+
+.ft-rule {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 18px 0 24px;
+}
+.ft-rule span:not(.ft-diamond) {
+  display: block;
+  width: 64px;
+  height: 1px;
+}
+.ft-rule span:first-child {
+  background: linear-gradient(90deg, transparent, var(--ft-gold));
+}
+.ft-rule span:last-child {
+  background: linear-gradient(90deg, var(--ft-gold), transparent);
+}
+.ft-diamond {
+  font-size: 8px;
+  color: var(--ft-gold);
+}
+
+.ft-subtitle {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 19px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ft-text-mid);
+  max-width: 580px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ── Cards grid ─────────────────────────────────────────────── */
+.ft-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* ── Single card ────────────────────────────────────────────── */
+.ft-card {
+  position: relative;
+  background: var(--ft-white);
+  border: 1px solid var(--ft-ivory-dark);
+  border-radius: var(--ft-radius);
+  padding: 40px 30px 36px;
+  box-shadow: var(--ft-shadow);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  animation: ftFadeUp 0.6s ease both;
+  transition: transform var(--ft-ease), box-shadow var(--ft-ease),
+    border-color var(--ft-ease);
+}
+
+.ft-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--ft-shadow-up);
+  border-color: rgba(201, 168, 76, 0.4);
+}
+
+/* Gold top shimmer on hover */
+.ft-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--ft-gold), transparent);
+  opacity: 0;
+  transition: opacity var(--ft-ease);
+}
+.ft-card:hover::before {
+  opacity: 1;
+}
+
+/* Large watermark number */
+.ft-card-num {
+  position: absolute;
+  top: -8px;
+  right: 18px;
+  font-family: "Cormorant Garamond", serif;
+  font-size: 90px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(201, 168, 76, 0.1);
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.03em;
+  transition: color var(--ft-ease);
+}
+.ft-card:hover .ft-card-num {
+  color: rgba(201, 168, 76, 0.16);
+}
+
+/* ── Icon ───────────────────────────────────────────────────── */
+.ft-icon-wrap {
+  width: 68px;
+  height: 68px;
+  background: var(--ft-gold-pale);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  flex-shrink: 0;
+  transition: background var(--ft-ease), border-color var(--ft-ease),
+    transform var(--ft-ease);
+}
+.ft-card:hover .ft-icon-wrap {
+  background: var(--ft-navy);
+  border-color: var(--ft-navy);
+  transform: scale(1.06);
+}
+
+.ft-icon-wrap img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  filter: none;
+  transition: filter var(--ft-ease);
+}
+.ft-card:hover .ft-icon-wrap img {
+  filter: brightness(0) invert(1);
+}
+
+/* ── Card body ──────────────────────────────────────────────── */
+.ft-card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.ft-card-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--ft-navy);
+  line-height: 1.3;
+  margin: 0 0 14px;
+  transition: color var(--ft-ease);
+}
+.ft-card:hover .ft-card-title {
+  color: var(--ft-gold);
+}
+
+.ft-card-divider {
+  width: 36px;
+  height: 2px;
+  background: var(--ft-gold);
+  border-radius: 1px;
+  margin-bottom: 18px;
+  transition: width var(--ft-ease);
+}
+.ft-card:hover .ft-card-divider {
+  width: 60px;
+}
+
+/* Points list */
+.ft-card-points {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.ft-card-points li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.ft-bullet {
+  font-size: 13px;
+  color: var(--ft-gold);
+  flex-shrink: 0;
+  margin-top: 2px;
+  line-height: 1.6;
+}
+
+.ft-card-points li span:last-child {
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.72;
+  color: var(--ft-text-mid);
+}
+
+/* ── Keyframes ──────────────────────────────────────────────── */
+@keyframes ftFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 991px) {
+  .ft-grid {
+    grid-template-columns: 1fr;
+    max-width: 560px;
+    margin: 0 auto;
+    gap: 22px;
+  }
+  .ft-card {
+    padding: 32px 24px 28px;
+  }
+}
+
+@media (max-width: 576px) {
+  .ft-section {
+    padding: 72px 0 80px;
+  }
+  .ft-title {
+    font-size: 32px;
+  }
+  .ft-subtitle {
+    font-size: 16px;
+  }
+  .ft-card-title {
+    font-size: 20px;
+  }
+  .ft-card-num {
+    font-size: 70px;
+  }
+}

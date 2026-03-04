@@ -1,39 +1,369 @@
+/* ============================================================
+   SingleCourseCustom — Premium Horizontal Card
+   Inspired by Coursera / Udemy quality, elevated with
+   Editorial Luxury: Deep Navy · Warm Gold · Ivory
+   Cormorant Garamond (display) + DM Sans (body)
+   ============================================================ */
 
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap");
 
-/* ... existing styles ... */
+/* ── Tokens ─────────────────────────────────────────────────── */
+:root {
+  --c-navy: #0d1b2e;
+  --c-navy-80: rgba(13, 27, 46, 0.8);
+  --c-navy-mid: #152540;
+  --c-gold: #c9a84c;
+  --c-gold-light: #e2c47a;
+  --c-gold-pale: #faf0d7;
+  --c-ivory: #faf7f2;
+  --c-border: #e8e2d9;
+  --c-white: #ffffff;
+  --c-text: #1a2a3a;
+  --c-text-mid: #4a5e72;
+  --c-text-muted: #8a9bb0;
+  --c-green: #1a7a4a;
+  --c-green-bg: #edf7f2;
 
-.priceDis {
-    font-size: 1.2rem !important;
-    font-weight: bold !important;
-    text-decoration: line-through !important;
-    color: red !important;
+  --radius: 10px;
+  --radius-sm: 5px;
+  --ease: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  --shadow-card: 0 1px 4px rgba(13, 27, 46, 0.06),
+    0 4px 16px rgba(13, 27, 46, 0.08);
+  --shadow-hover: 0 4px 12px rgba(13, 27, 46, 0.08),
+    0 16px 48px rgba(13, 27, 46, 0.14);
 }
 
-li.price {
-    color: #002366 !important;
-    font-size: 1.1rem !important;
-    font-weight: bold !important;
+/* ── Outer wrapper ──────────────────────────────────────────── */
+.scc-outer {
+  width: 100%;
+  margin-bottom: 16px;
+  font-family: "DM Sans", sans-serif;
 }
 
-.case-img {
-    height: 150px !important;
-    overflow: hidden !important;
+/* ── Card ───────────────────────────────────────────────────── */
+.scc-card {
+  display: flex;
+  align-items: stretch;
+  background: var(--c-white);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: box-shadow var(--ease), border-color var(--ease),
+    transform var(--ease);
+  cursor: pointer;
 }
 
-.case-img img {
-    width: 100% !important;
-    height: 150px !important;
-    object-fit: cover !important;
+.scc-card:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: rgba(201, 168, 76, 0.45);
+  transform: translateY(-3px);
 }
 
-.inner-course {
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    overflow: hidden;
-    transition: all 0.3s ease;
+/* ── Thumbnail ──────────────────────────────────────────────── */
+.scc-thumb {
+  position: relative;
+  flex-shrink: 0;
+  width: 220px;
+  display: block;
+  overflow: hidden;
+  background: var(--c-navy-mid);
 }
 
-.inner-course:hover {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    transform: translateY(-2px);
+.scc-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scc-card:hover .scc-thumb img {
+  transform: scale(1.05);
+}
+
+/* overlay + play icon */
+.scc-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 27, 46, 0.38);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--ease);
+}
+.scc-card:hover .scc-thumb-overlay {
+  opacity: 1;
+}
+
+.scc-play-ring {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--c-gold);
+  color: var(--c-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 2px; /* optical center for play icon */
+  box-shadow: 0 4px 20px rgba(201, 168, 76, 0.5);
+  transform: scale(0.85);
+  transition: transform var(--ease);
+}
+.scc-card:hover .scc-play-ring {
+  transform: scale(1);
+}
+
+/* level pill on image */
+.scc-level-pill {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-white);
+  background: var(--c-navy-80);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 3px;
+  padding: 3px 9px;
+}
+
+/* ── Content ────────────────────────────────────────────────── */
+.scc-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px 16px;
+  gap: 0;
+}
+
+/* top row — category tag + duration */
+.scc-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 9px;
+}
+
+.scc-category {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  background: var(--c-gold-pale);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  border-radius: 3px;
+  padding: 3px 9px;
+  line-height: 1;
+}
+
+.scc-duration {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11.5px;
+  font-weight: 400;
+  color: var(--c-text-muted);
+}
+.scc-duration svg {
+  flex-shrink: 0;
+}
+
+/* title */
+.scc-title {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 17.5px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--c-text);
+  margin: 0 0 10px;
+}
+.scc-title a {
+  color: inherit;
+  text-decoration: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: color var(--ease);
+}
+.scc-title a:hover {
+  color: var(--c-gold);
+}
+
+/* meta row */
+.scc-meta-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.scc-author,
+.scc-lessons {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--c-text-mid);
+  line-height: 1;
+}
+.scc-author svg,
+.scc-lessons svg {
+  color: var(--c-gold);
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+.scc-dot-sep {
+  color: var(--c-text-muted);
+  font-size: 12px;
+}
+
+/* rating */
+.scc-rating-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.scc-score {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--c-gold);
+  line-height: 1;
+}
+
+.scc-stars {
+  display: flex;
+  gap: 2px;
+  color: var(--c-gold);
+}
+.scc-stars .star-full {
+  color: var(--c-gold);
+}
+.scc-stars .star-half {
+  color: var(--c-gold);
+  opacity: 0.6;
+}
+.scc-stars .star-empty {
+  color: var(--c-border);
+}
+
+/* push bottom to end */
+.scc-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 12px;
+  border-top: 1px solid var(--c-border);
+}
+
+.scc-price-group {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+}
+
+.scc-original {
+  font-size: 12.5px;
+  color: var(--c-text-muted);
+  text-decoration: line-through;
+}
+
+.scc-price {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--c-navy);
+  letter-spacing: 0.01em;
+  line-height: 1;
+}
+
+.scc-price--free {
+  font-family: "DM Sans", sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--c-green);
+  background: var(--c-green-bg);
+  border-radius: 3px;
+  padding: 4px 10px;
+}
+
+/* Enroll button */
+.scc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-decoration: none;
+  color: var(--c-white);
+  background: var(--c-navy);
+  border-radius: var(--radius-sm);
+  padding: 9px 18px;
+  transition: background var(--ease), box-shadow var(--ease);
+}
+.scc-btn:hover {
+  background: var(--c-gold);
+  color: var(--c-navy);
+  box-shadow: 0 4px 16px rgba(201, 168, 76, 0.38);
+}
+.scc-btn svg {
+  transition: transform var(--ease);
+}
+.scc-btn:hover svg {
+  transform: translateX(3px);
+}
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .scc-card {
+    flex-direction: column;
+  }
+  .scc-thumb {
+    width: 100%;
+    height: 190px;
+  }
+  .scc-content {
+    padding: 16px 16px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scc-thumb {
+    height: 160px;
+  }
+  .scc-title {
+    font-size: 16px;
+  }
+  .scc-price {
+    font-size: 19px;
+  }
+  .scc-btn {
+    padding: 8px 14px;
+    font-size: 12px;
+  }
+  .scc-duration {
+    display: none;
+  }
 }
