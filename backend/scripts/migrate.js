@@ -1,21 +1,21 @@
-const { sequelize } = require('../models');
+const { sequelize } = require("../models");
 
 async function migrate() {
   try {
-    console.log('🔄 Starting database migration...');
-    
+    console.log("🔄 Starting database migration...");
+
     // Test connection
     await sequelize.authenticate();
-    console.log('✅ Database connection established');
-    
-    // Sync all models (create tables)
-    await sequelize.sync({ force: true }); // Use force: true to drop and recreate tables
-    console.log('✅ All tables created successfully');
-    
-    console.log('🎉 Migration completed successfully!');
-    
+    console.log("✅ Database connection established");
+
+    throw new Error(
+      "Use npm run migrate (sequelize-cli db:migrate); destructive sync is disabled.",
+    );
+
+    console.log("🎉 Migration completed successfully!");
   } catch (error) {
-    console.error('❌ Migration failed:', error);
+    console.error("❌ Migration failed:", error);
+    process.exitCode = 1;
   } finally {
     await sequelize.close();
   }

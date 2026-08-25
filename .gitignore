@@ -5,13 +5,13 @@
 # --- Node modules ---
 node_modules/
 backend/node_modules/
-eschooling-react-main/node_modules/
+frontend/node_modules/
 
 # --- Build output ---
 dist/
 build/
 backend/dist/
-eschooling-react-main/build/
+frontend/build/
 
 # --- Environment variables ---
 .env
@@ -20,7 +20,7 @@ eschooling-react-main/build/
 .env.test.local
 .env.production.local
 backend/.env
-eschooling-react-main/.env
+frontend/.env
 
 # --- Logs ---
 *.log

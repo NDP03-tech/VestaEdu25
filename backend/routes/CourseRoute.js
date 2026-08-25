@@ -1,25 +1,43 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const CourseController = require('../controllers/CourseController');
-const multer = require('multer');
-const authenticateToken = require('../middleware/authenticateToken');
+const CourseController = require("../controllers/CourseController");
+const multer = require("multer");
+const authenticateToken = require("../middleware/authenticateToken");
+const authorizeRoles = require("../middleware/authorizeRoles");
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 // Route để tạo khóa học (kèm upload ảnh)
-router.post('/create', authenticateToken, upload.single('image'), CourseController.createCourse);
+router.post(
+  "/create",
+  authenticateToken,
+  authorizeRoles("admin", "teacher"),
+  upload.single("image"),
+  CourseController.createCourse,
+);
 
 // Route để lấy tất cả khóa học
-router.get('/', CourseController.getAllCourses);
+router.get("/", CourseController.getAllCourses);
 
 // Route để cập nhật khóa học (kèm upload ảnh)
-router.put('/:id', authenticateToken, upload.single('image'), CourseController.updateCourse);
+router.put(
+  "/:id",
+  authenticateToken,
+  authorizeRoles("admin", "teacher"),
+  upload.single("image"),
+  CourseController.updateCourse,
+);
 
 // Route để xóa khóa học
-router.delete('/:id', authenticateToken, CourseController.deleteCourse);
+router.delete(
+  "/:id",
+  authenticateToken,
+  authorizeRoles("admin", "teacher"),
+  CourseController.deleteCourse,
+);
 
 // Route để lấy chi tiết khóa học theo ID
-router.get('/:id', CourseController.getCourseById);
+router.get("/:id", CourseController.getCourseById);
 
 module.exports = router;

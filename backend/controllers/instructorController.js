@@ -1,5 +1,6 @@
 const Instructor = require("../models/Instructor");
 const { Op } = require("sequelize");
+const uploadToCloudinary = require("../utils/uploadToCloudinary");
 
 // @desc    Get all instructors
 // @route   GET /api/instructors
@@ -101,11 +102,15 @@ exports.createInstructor = async (req, res) => {
       });
     }
 
+    const imageUrl = req.file
+      ? (await uploadToCloudinary(req.file.buffer, "vestaedu/instructors"))
+          .secure_url
+      : image;
     const instructor = await Instructor.create({
       name,
       designation,
       bio,
-      image: req.file ? req.file.filename : image,
+      image: imageUrl,
       facebook,
       twitter,
       linkedin,
@@ -144,9 +149,10 @@ exports.updateInstructor = async (req, res) => {
 
     const updateData = { ...req.body };
 
-    if (req.file) {
-      updateData.image = req.file.filename;
-    }
+    if (req.file)
+      updateData.image = (
+        await uploadToCloudinary(req.file.buffer, "vestaedu/instructors")
+      ).secure_url;
 
     await instructor.update(updateData);
 

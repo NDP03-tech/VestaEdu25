@@ -2,6 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const courseRoutes = require("./routes/CourseRoute");
 const cors = require("cors");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const Sentry = require("@sentry/node");
 const userRoutes = require("./routes/userRoutes");
 require("dotenv").config();
 const blogRoutes = require("./routes/BlogRoutes");
@@ -20,23 +23,56 @@ const instructorRoutes = require("./routes/instructorRoutes");
 const { sequelize } = require("./models");
 const app = express();
 const path = require("path");
+const auditLog = require("./middleware/auditLog");
+const errorHandler = require("./middleware/errorHandler");
+
+if (process.env.NODE_ENV === "production" && !process.env.ACCESS_TOKEN_SECRET) {
+  throw new Error("ACCESS_TOKEN_SECRET must be configured in production");
+}
+
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  environment: process.env.NODE_ENV || "development",
+  enabled: Boolean(process.env.SENTRY_DSN),
+});
 
 // Middleware
+app.set("trust proxy", 1);
+app.use(helmet());
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 300,
+  standardHeaders: "draft-7",
+  legacyHeaders: false,
+  message: {
+    success: false,
+    message: "Quá nhiều yêu cầu, vui lòng thử lại sau.",
+  },
+});
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 10,
+  standardHeaders: "draft-7",
+  legacyHeaders: false,
+  message: { success: false, message: "Quá nhiều lần thử đăng nhập." },
+});
+app.use("/api", apiLimiter);
+app.use("/api/login", authLimiter);
+app.use("/api/register", authLimiter);
+app.use(auditLog);
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 // CORS - Tự động hỗ trợ cả development và production
-const allowedOrigins = 
-  process.env.NODE_ENV === 'production'
-    ? [
-        "https://vestaedu.online",
-        "https://www.vestaedu.online",
-      ]
+const allowedOrigins = process.env.CORS_ORIGINS
+  ? process.env.CORS_ORIGINS.split(",").map((origin) => origin.trim())
+  : process.env.NODE_ENV === "production"
+    ? ["https://vestaedu.online", "https://www.vestaedu.online"]
     : [
         "http://localhost:3000",
         "http://localhost:3001",
         "http://localhost:3002",
-        "http://localhost:5000", 
+        "http://localhost:5000",
       ];
 
 app.use(
@@ -44,10 +80,10 @@ app.use(
     origin: function (origin, callback) {
       // Cho phép requests không có origin (mobile apps, Postman, etc.)
       if (!origin) return callback(null, true);
-      
+
       // ✅ BỎ DẤU "/" Ở CUỐI NẾU CÓ
-      const normalizedOrigin = origin.replace(/\/$/, '');
-      
+      const normalizedOrigin = origin.replace(/\/$/, "");
+
       if (allowedOrigins.indexOf(normalizedOrigin) !== -1) {
         callback(null, true);
       } else {
@@ -58,7 +94,7 @@ app.use(
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
     allowedHeaders: ["Content-Type", "Authorization"],
-  })
+  }),
 );
 
 // Xử lý preflight request
@@ -70,17 +106,15 @@ sequelize
   .then(() => {
     console.log("✅ Connected to MySQL database");
     // Chỉ sync khi development
-    if (process.env.NODE_ENV !== 'production') {
-      return sequelize.sync({ alter: false  });
-    } else {
+    if (process.env.NODE_ENV !== "production")
       return sequelize.sync({ alter: false });
-    }
   })
   .then(() => {
     console.log("✅ Database synchronized");
   })
   .catch((err) => {
     console.error("❌ MySQL connection error:", err);
+    Sentry.captureException(err);
   });
 
 // Sử dụng routes
@@ -107,8 +141,19 @@ app.use("/api", uploadRoute);
 
 // Health check endpoint
 app.get("/health", (req, res) => {
-  res.json({ status: "OK", timestamp: new Date() });
+  sequelize
+    .authenticate()
+    .then(() => res.json({ status: "OK", timestamp: new Date() }))
+    .catch(() =>
+      res.status(503).json({ status: "DEGRADED", timestamp: new Date() }),
+    );
 });
+
+app.use((error, req, res, next) => {
+  Sentry.captureException(error);
+  next(error);
+});
+app.use(errorHandler);
 
 // Khởi động server
 const PORT = process.env.PORT || 5000;

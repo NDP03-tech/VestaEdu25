@@ -1,10 +1,10 @@
-const cloudinary = require('cloudinary').v2;
+const cloudinary = require("cloudinary").v2;
 
 // Cấu hình Cloudinary (lấy từ Dashboard Cloudinary)
 cloudinary.config({
-  cloud_name: 'dubzoozqi',
-  api_key: '364771119671548',
-  api_secret: '8lmU9raEEqiHgl6jc4sG4lreGs8',
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 module.exports = cloudinary;

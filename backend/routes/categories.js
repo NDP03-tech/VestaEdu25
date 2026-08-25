@@ -1,16 +1,23 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const categoryController = require('../controllers/categoryController');
-const Quiz = require('../models/Quiz');
+const categoryController = require("../controllers/categoryController");
+const Quiz = require("../models/Quiz");
+const authenticateToken = require("../middleware/authenticateToken");
+const authorizeRoles = require("../middleware/authorizeRoles");
 
 // GET tất cả danh mục
-router.get('/', categoryController.getAllCategories);
+router.get("/", categoryController.getAllCategories);
 
 // POST tạo danh mục mới
-router.post('/', categoryController.createCategory);
+router.post(
+  "/",
+  authenticateToken,
+  authorizeRoles("admin", "teacher"),
+  categoryController.createCategory,
+);
 
 // GET tất cả quiz thuộc một danh mục
-router.get('/:categoryId/quizzes', async (req, res) => {
+router.get("/:categoryId/quizzes", async (req, res) => {
   try {
     const { categoryId } = req.params;
     const quizzes = await Quiz.findAll({ where: { category: categoryId } });
@@ -20,9 +27,12 @@ router.get('/:categoryId/quizzes', async (req, res) => {
   }
 });
 
-
 // DELETE: Xoá category và tất cả quizzes thuộc category
-router.delete('/:categoryId', categoryController.deleteCategoryAndQuizzes);
-
+router.delete(
+  "/:categoryId",
+  authenticateToken,
+  authorizeRoles("admin"),
+  categoryController.deleteCategoryAndQuizzes,
+);
 
 module.exports = router;
